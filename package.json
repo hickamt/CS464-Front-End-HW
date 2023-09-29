@@ -1,0 +1,20 @@
+{
+  "name": "cs464_homework",
+  "version": "1.0.0",
+  "description": "In this repository, you will find the starter files for the CS 464P/564: Front End Web Technologies homework assignments.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hickamt/CS464-Front-End-HW.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hickamt/CS464-Front-End-HW/issues"
+  },
+  "homepage": "https://github.com/hickamt/CS464-Front-End-HW#readme"
+}
