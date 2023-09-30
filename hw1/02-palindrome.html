@@ -9,17 +9,17 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
     <script defer src="02-palindrome.js"></script>
   </head>
-  <body>
+  <body style="background:black; color:white; margin:1em">
     <main>
       <section>
         <h1>Exercise 02 - Palindrome</h1>
         <div>
-          <label>Enter a positive number:</label>
+          <label style="font-size: large; margin-right: 0.5em;">Enter a positive number:</label>
           <input type="number" />
         </div>
-        <div>
-          <p>Is this a palindrome?</p>
-          <div></div>
+        <div style="display: flex;">
+          <p style="font-size: large; margin-right: 0.5em;">Is this a palindrome?</p>
+          <p style="font-size: large;" id="palindrome"></p>
         </div>
       </section>
     </main>
