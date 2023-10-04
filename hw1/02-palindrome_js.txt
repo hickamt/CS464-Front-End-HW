@@ -1,0 +1,147 @@
+/**
+ * Creates a Bootstrap 5.0 customized paragraph element <p>
+ * @param color of the text as 'string'
+ * @param fontSize size of the text '1' -> '5'
+ * @param message output message to screen 'string messages'
+ * @returns the bootstrap customized <p class="bootstrap"> element
+ */
+const htmlParagraphElement = (color, fontSize, message) => {
+  return `<p class="text-${color} fs-${fontSize} fw-bold">${message}</p>`;
+};
+
+/**
+ * Sets the document element innerHTML to the given parameter value
+ * @param innerValue boolean: true | false
+ */
+function writeInnerHTML(innerValue) {
+  document.getElementById("palindrome").innerHTML = innerValue;
+}
+
+/**
+ * @param boolValue of true or false
+ * @returns Yes, you entered a Palindrome if boolValue is true,
+ * or No, this is not a Palindrome for boolValue of false.
+ */
+const outputMessage = (boolValue) => {
+  return boolValue
+    ? htmlParagraphElement("success", "5", "Yes, this is a Palindrome!")
+    : htmlParagraphElement(
+        "danger",
+        "5",
+        "This is not a Palindrome. Try again."
+      );
+};
+
+/**
+ * Validate the users input for a Palindrome
+ * @param array of the input as char separated values ["1", "2", ...]
+ * @param rev_array is the input in reverse order as char separated values [..., "2", "1"]
+ * @returns a boolean: true | false if both input arrays exist and each character
+ * is equal in string value to the other. If array or rev_array are undefined, not the same length
+ * or less than / equal to zero then the function throws a new Error()
+ */
+const isPalindrome = (inputValue) => {
+  const array = inputToArray(inputValue);
+  const rev_array = inputToArrayReversed(inputValue);
+  if (
+    !array ||
+    !rev_array ||
+    array.length !== rev_array.length ||
+    array.length <= 0
+  ) {
+    throw new Error(htmlParagraphElement("dark", "5", "Please enter a number"));
+  }
+  return array.every((value, index) => value === rev_array[index]);
+};
+
+/**
+ * Splits the user input string into comma separated values
+ * and then reverses the values
+ * @param inputValue is the user input value as a 'string'
+ * @returns an array of the user input as comma separated values
+ * in the reverse order given
+ */
+const inputToArrayReversed = (inputValue) => inputValue.split("").reverse();
+
+/**
+ * Splits the user input string into comma separated values
+ * @param inputValue is the user input value as a 'string'
+ * @returns an array of the user input as comma separated values
+ */
+const inputToArray = (inputValue) => inputValue.split("");
+
+/**
+ * Validates the user input is of string type
+ * @param inputValue is the user input
+ * @returns the inputValue if the input is of string type or
+ * throws an error message if the type is not of string type
+ */
+const isString = (inputValue) => {
+  if (typeof inputValue !== "string") {
+    throw new Error(
+      htmlParagraphElement(
+        "danger",
+        "5",
+        "Not a valid input, requires a positive integer"
+      )
+    );
+  }
+  return inputValue;
+};
+
+/**
+ * Validation that the input is a postive integer
+ * @param inputValue is the users input value as string type
+ * @returns the inputValue if the integer is positive or
+ * throws a new Error().
+ */
+const isPositiveInteger = (inputValue) => {
+  if (Number(inputValue) < 0) {
+    throw new Error(
+      htmlParagraphElement(
+        "danger",
+        "5",
+        "Not a valid input, requires a positive integer"
+      )
+    );
+  }
+  return inputValue;
+};
+
+/**
+ * Processes a stack call of functions. Functional, Declarative, Composition
+ * @param  {...any} functions as single argument, single object return function stack
+ * @returns the single object of each function until reaching the end of the call stack
+ * Source: https://www.freecodecamp.org/news/pipe-and-compose-in-javascript-5b04004ac937/
+ */
+const pipe =
+  (...functions) =>
+  (x) =>
+    functions.reduce((v, f) => f(v), x);
+
+/**
+ * Event listener on HTML element <input type="number" />
+ * Upon user input, the event listener will activate the callback
+ * which will validate input for a Palindrome.
+ * @param event contains the querySelector('input') element
+ */
+document.querySelector("input").addEventListener("input", (event) => {
+  try {
+    const inputValue = event.target.value;
+    pipe(
+      isString,
+      isPositiveInteger,
+      isPalindrome,
+      outputMessage,
+      writeInnerHTML
+    )(inputValue);
+    // writeInnerHTML(
+    //   outputMessage(
+    //     isPalindrome(inputToArray(inputValue), inputToArrayReversed(inputValue))
+    //   )
+    // );
+  } catch (error) {
+    console.error(error.message, error);
+    writeInnerHTML(error.message);
+  }
+});
