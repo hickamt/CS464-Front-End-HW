@@ -35,7 +35,7 @@ const p_error = {
  * @param innerValue is an HTML Element such as <p>message</p>
  */
 const setInnerHTML = function setInnerHTMLValue(innerValue) {
-  document.getElementById("palindrome").innerHTML = innerValue;
+  document.getElementById('palindrome').innerHTML = innerValue;
 };
 
 /**
@@ -45,7 +45,7 @@ const setInnerHTML = function setInnerHTMLValue(innerValue) {
  * @param message output message to screen 'string messages'
  * @returns the bootstrap customized <p class="bootstrap"> element
  */
-const htmlParagraphElement = ({ id, color, fontSize, fontWeight, message }) => {
+const createHtmlElement = ({ id, color, fontSize, fontWeight, message }) => {
   return `<p id=${id} class="text-${color} fs-${fontSize} fw-${fontWeight}">${message}</p>`;
 };
 
@@ -56,8 +56,8 @@ const htmlParagraphElement = ({ id, color, fontSize, fontWeight, message }) => {
  */
 const htmlMessage = function GiveAName(boolValue) {
   return boolValue
-    ? htmlParagraphElement(p_success)
-    : htmlParagraphElement(p_failure);
+    ? createHtmlElement(p_success)
+    : createHtmlElement(p_failure);
 };
 
 /**
@@ -76,7 +76,7 @@ const inputToArrayReversed = (inputValue) => [...inputValue].reverse();
  * NOTE: why .split("") should not be used
  * https://stackoverflow.com/questions/4547609/how-can-i-get-a-character-array-from-a-string/34717402#34717402
  */
-const inputToArray = (inputValue) => [...inputValue]
+const inputToArray = (inputValue) => [...inputValue];
 
 /**
  * Validate the users input for a Palindrome
@@ -97,7 +97,7 @@ const isPalindrome = (inputValue) => {
  */
 const isPositiveInteger = (inputValue) => {
   if (Number(inputValue) < 0) {
-    throw new Error(htmlParagraphElement(p_error));
+    throw new Error(createHtmlElement(p_error));
   }
   return inputValue;
 };
@@ -133,6 +133,6 @@ document.querySelector("input").addEventListener("input", (event) => {
       document.getElementById("palindrome").innerHTML = "";
     }
   } catch (error) {
-    setInnerHTML(error.message);
+    setInnerHTML(createHtmlElement(p_error));
   }
 });
