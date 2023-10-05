@@ -54,7 +54,7 @@ const createHtmlElement = ({ id, color, fontSize, fontWeight, message }) => {
  * @returns Yes, you entered a Palindrome if boolValue is true,
  * or No, this is not a Palindrome for boolValue of false.
  */
-const htmlMessage = function GiveAName(boolValue) {
+const getHtmlElement = function GiveAName(boolValue) {
   return boolValue
     ? createHtmlElement(p_success)
     : createHtmlElement(p_failure);
@@ -126,7 +126,7 @@ document.querySelector("input").addEventListener("input", (event) => {
       pipe(
         isPositiveInteger,
         isPalindrome,
-        htmlMessage,
+        getHtmlElement,
         setInnerHTML
       )(event.target.value);
     } else {
