@@ -61,20 +61,22 @@ const htmlMessage = function GiveAName(boolValue) {
 };
 
 /**
- * Splits the user input string into comma separated values
- * and then reverses the values
+ * Spreads input string to array in reverse
  * @param inputValue is the user input value as a 'string'
- * @returns an array of the user input as comma separated values
- * in the reverse order given
+ * @returns array of separated input in reverse
+ * NOTE: why .split("") should not be used
+ * https://stackoverflow.com/questions/4547609/how-can-i-get-a-character-array-from-a-string/34717402#34717402
  */
-const inputToArrayReversed = (inputValue) => inputValue.split("").reverse();
+const inputToArrayReversed = (inputValue) => [...inputValue].reverse();
 
 /**
- * Splits the user input string into comma separated values
+ * Spreads the input string to array
  * @param inputValue is the user input value as a 'string'
- * @returns an array of the user input as comma separated values
+ * @returns array of separated input
+ * NOTE: why .split("") should not be used
+ * https://stackoverflow.com/questions/4547609/how-can-i-get-a-character-array-from-a-string/34717402#34717402
  */
-const inputToArray = (inputValue) => inputValue.split("");
+const inputToArray = (inputValue) => [...inputValue]
 
 /**
  * Validate the users input for a Palindrome
