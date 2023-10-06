@@ -35,7 +35,7 @@ const p_error = {
  * @param innerValue is an HTML Element such as <p>message</p>
  */
 const setInnerHTML = function setInnerHTMLValue(innerValue) {
-  document.getElementById('palindrome').innerHTML = innerValue;
+  document.getElementById("palindrome").innerHTML = innerValue;
 };
 
 /**
