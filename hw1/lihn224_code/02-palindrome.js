@@ -82,20 +82,20 @@ const palindrome = () => {
  * Function to handle key up event
  * @param {Event} e - The event object
  */
-const handleKeyUp = (e) => {
-  e.preventDefault();
-  if (e.keyCode === 13) {
-    palindrome();
-  }
-};
+// const handleKeyUp = (e) => {
+//   e.preventDefault();
+//   if (e.keyCode === 13) {
+//     palindrome();
+//   }
+// };
 
 // Add an event listener for key up events on numberInput
 // Only if numberInput is found
-if (numberInput) {
-numberInput.addEventListener("keyup", handleKeyUp);
-// numberInput.addEventListener("keyup", (event) => {
-//   if (numberInput && event.keyCode === 13) {
-//     palindrome();
-//   }
-// });
-}
+// if (numberInput) {
+// numberInput.addEventListener("keyup", handleKeyUp);
+numberInput.addEventListener("keyup", (event) => {
+  if (event.target.value && event.keyCode === 13) {
+    palindrome();
+  }
+});
+// }
