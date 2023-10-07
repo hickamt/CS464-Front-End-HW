@@ -6,27 +6,18 @@
  * See Warning: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/number
  * OR, Mozilla Bug Report: https://bugzilla.mozilla.org/show_bug.cgi?id=1398528
  */
-const p_success = {
-  id: "palindrome",
-  color: "success",
-  fontSize: "5",
-  fontWeight: "bold",
+const m_success = {
+  color: "text-success",
   message: "Yes, this is a Palindrome!",
 };
 
-const p_failure = {
-  id: "palindrome",
-  color: "danger",
-  fontSize: "5",
-  fontWeight: "bold",
+const m_failure = {
+  color: "text-danger",
   message: "This is not a Palindrome. Try again.",
 };
 
-const p_error = {
-  id: "palindrome",
-  color: "danger",
-  fontSize: "5",
-  fontWeight: "bold",
+const m_error = {
+  color: "text-danger",
   message: "Not a valid input, enter a positive integer",
 };
 
@@ -45,8 +36,14 @@ const setInnerHTML = function setInnerHTMLValue(innerValue) {
  * @param message output message to screen 'string messages'
  * @returns the bootstrap customized <p class="bootstrap"> element
  */
-const createHtmlElement = ({ id, color, fontSize, fontWeight, message }) => {
-  return `<p id=${id} class="text-${color} fs-${fontSize} fw-${fontWeight}">${message}</p>`;
+const createHtmlElement = ({
+  id = "output-message",
+  color = "text-dark",
+  fontSize = "fs-5",
+  fontWeight = "fw-bold",
+  message = "Please enter a positive integer",
+}) => {
+  return `<p id=${id} class="${color} ${fontSize} ${fontWeight}">${message}</p>`;
 };
 
 /**
@@ -56,27 +53,9 @@ const createHtmlElement = ({ id, color, fontSize, fontWeight, message }) => {
  */
 const getHtmlElement = function GiveAName(boolValue) {
   return boolValue
-    ? createHtmlElement(p_success)
-    : createHtmlElement(p_failure);
+    ? createHtmlElement(m_success)
+    : createHtmlElement(m_failure);
 };
-
-/**
- * Spreads input string to array in reverse
- * @param inputValue is the user input value as a 'string'
- * @returns array of separated input in reverse
- * NOTE: why .split("") should not be used
- * https://stackoverflow.com/questions/4547609/how-can-i-get-a-character-array-from-a-string/34717402#34717402
- */
-const inputToArrayReversed = (inputValue) => [...inputValue].reverse();
-
-/**
- * Spreads the input string to array
- * @param inputValue is the user input value as a 'string'
- * @returns array of separated input
- * NOTE: why .split("") should not be used
- * https://stackoverflow.com/questions/4547609/how-can-i-get-a-character-array-from-a-string/34717402#34717402
- */
-const inputToArray = (inputValue) => [...inputValue];
 
 /**
  * Validate the users input for a Palindrome
@@ -84,8 +63,8 @@ const inputToArray = (inputValue) => [...inputValue];
  * @returns a boolean: true | false
  */
 const isPalindrome = (inputValue) => {
-  const array = inputToArray(inputValue);
-  const rev_array = inputToArrayReversed(inputValue);
+  const array = [...inputValue];
+  const rev_array = [...inputValue].reverse();
   return array.every((value, index) => value === rev_array[index]);
 };
 
@@ -97,7 +76,7 @@ const isPalindrome = (inputValue) => {
  */
 const isPositiveInteger = (inputValue) => {
   if (Number(inputValue) < 0) {
-    throw new Error(createHtmlElement(p_error));
+    throw new Error(createHtmlElement(m_error));
   }
   return inputValue;
 };
@@ -133,6 +112,6 @@ document.querySelector("input").addEventListener("input", (event) => {
       document.getElementById("palindrome").innerHTML = "";
     }
   } catch (error) {
-    setInnerHTML(createHtmlElement(p_error));
+    setInnerHTML(createHtmlElement(m_error));
   }
 });
