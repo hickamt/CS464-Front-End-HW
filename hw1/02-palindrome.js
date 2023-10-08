@@ -31,10 +31,12 @@ const setInnerHTML = function setInnerHTMLValue(innerValue) {
 
 /**
  * Creates a Bootstrap 5.0 customized paragraph element <p>
- * @param color of the text as 'string'
- * @param fontSize size of the text '1' -> '5'
+ * @param id element id as 'string'
+ * @param color Bootstrap color class
+ * @param fontSize Bootstrap text size: [1, 6] where 1 is largest
+ * @param fontWeight Bootstrap text weight of: [bold, bolder, normal, light, lighter, italic, and normal]
  * @param message output message to screen 'string messages'
- * @returns the bootstrap customized <p class="bootstrap"> element
+ * @returns the customized paragraph <p class="bootstrap"> element
  */
 const createHtmlElement = ({
   id = "output-message",
@@ -51,7 +53,7 @@ const createHtmlElement = ({
  * @returns Yes, you entered a Palindrome if boolValue is true,
  * or No, this is not a Palindrome for boolValue of false.
  */
-const getHtmlElement = function GiveAName(boolValue) {
+const getElement = function getHtmlElement(boolValue) {
   return boolValue
     ? createHtmlElement(m_success)
     : createHtmlElement(m_failure);
@@ -105,7 +107,7 @@ document.querySelector("input").addEventListener("input", (event) => {
       pipe(
         isPositiveInteger,
         isPalindrome,
-        getHtmlElement,
+        getElement,
         setInnerHTML
       )(event.target.value);
     } else {
