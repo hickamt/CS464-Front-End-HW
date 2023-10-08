@@ -1,4 +1,5 @@
 <!-- Grid Garden: https://cssgridgarden.com/ -->
+
 ## Exercise 02 - CSS Grid
 
 ```css
@@ -16,9 +17,9 @@
 12. grid-row-start: 3;
 13. grid-row: span 3 / 6;
 14. grid-column: 2;
-grid-row: 5;
+    grid-row: 5;
 15. grid-column: span 4 / 6;
-grid-row: span 5;
+    grid-row: span 5;
 16. grid-area: 1 / 2 / 4 / 6;
 17. grid-area: 2 / 3 / 5 / 6;
 18. order: 5;
@@ -26,4 +27,10 @@ grid-row: span 5;
 20. grid-template-columns: 50% 50%;
 21. grid-template-columns: repeat(8, 12.5%);
 22. grid-template-columns: 100px 3em 40%;
+23. grid-template-columns: 1fr 5fr;
+24. grid-template-columns: 50px 1fr 1fr 1fr 50px;
+25. grid-template-columns: 75px 3fr 2fr;
+26. grid-template-rows:  12.5px 12.5px 12.5px 12.5px;
+27. grid-template: 60% 60% / 200px;
+28. grid-template: 1fr 50px / 20% 80%;
 ```
