@@ -1,23 +1,25 @@
 /* 
   Bootstrap 5: Typography <mark></mark> to highlight word(s)
+  Source of R.D. https://www.youtube.com/watch?v=Ixt6k9aatPQ
 */
 
-const validateInput = function validateInputValue(inputValue) {
-  const regex = /[^a-z,^A-Z,^\.,^\,^\ \,]/gm;
-  const invalidArray = inputValue.matchAll(regex);
-  if (invalidArray) {
-    console.log(invalidArray)
-    // alert("Not a valid input, plase enter a word to highlight");
-  }
+const validate = function validateInput(inputValue) {
+  // /[^a-z^A-Z^\/.\^\/,]/gmi
+}
+
+const escapeInput = function escapeInputValue(findInputValue) {
+  return findInputValue.replace(/[.*+?^${}()|[/]\\]/g, "\\$&");
 };
 
-document.getElementById('form-input').addEventListener("keydown", (event) => {
-  const inputValue = "";
-  if (event.target.value.checkValidity()) {
-    inputValue = event.target.value;
-  }
-  else {
-    alert("Not a Valid Input")
-  }
-  // validateInput(inputValue)
+document.getElementById("form-input").addEventListener("keydown", (event) => {
+  try {
+    const paragraph = document.getElementById("paragraph");
+    const findInputValue = event.target.value;
+    const highlight = escapeInput(findInputValue);
+    let foundRegEx = new RegExp(`${highlight}`, "gi");
+    paragraph.innerHTML = paragraph.textContent.replace(
+      foundRegEx,
+      (text) => `<mark>${text}</mark>`
+    );
+  } catch (error) {}
 });
