@@ -34,6 +34,27 @@ const highlightedWord = function markGivenWordToHighlight(textInput) {
 };
 
 /**
+ * checks for equality of the word.toLowerCase() with
+ * inputText.toLowerCase() including words appended with:
+ * word + '.' OR word + ',' or word + '-'
+ * @param word is a single word from mapped array
+ * @param inputText is the user word to search for
+ * @returns boolean true for exact equality or false
+ * for word that does not match input explicitly
+ */
+const matchWord = function matchWordEquality(word, inputText) {
+  switch (word) {
+    case inputText:
+    case inputText + ".":
+    case inputText + ",":
+      // case inputText.concat(String.fromCharCode(8212)):
+      return true;
+    default:
+      return false;
+  }
+};
+
+/**
  * Builds a new paragraph with each matching word highlighted using
  * html element <mark>textInput</mark>
  * @param textInput user input word to match
@@ -46,7 +67,7 @@ const buildParagraph = function mapAndBuildNewParagraph(
 ) {
   return paragraphArray
     .map((word) => {
-      if (word.toLowerCase() === textInput.toLowerCase()) {
+      if (matchWord(word.toLowerCase(), textInput.toLowerCase())) {
         return word.replace(regExInput(textInput), highlightedWord(textInput));
       } else {
         return word;
