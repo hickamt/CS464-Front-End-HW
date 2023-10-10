@@ -58,6 +58,7 @@ Files:
   - The form should be empty when it loads, meaning there should be no default value on any item.
   - Use the submit event on the form submission.
   - Make sure your implementation works on various browsers.
+- Personal Note: use the <select> [box] </select> allowing more than one selection value
 
 Resources:
 
