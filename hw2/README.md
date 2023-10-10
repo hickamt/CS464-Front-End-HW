@@ -32,7 +32,7 @@ Files:
 2. [Background 04 JS](./04-background.js)
 
 - Style the HTML file using Bootstrap 5 classes to match the screenshots below
-- In the JavaScript file, you should set the background color to a randomly generated color for a given time interval (time interval input from user). Start by implementing a background color change every three seconds (default). You should implement a button that allows the user to 'stop' and 'start' the background color change. Once the background color change is stopped, the user should be able to specify a new inteval for changing the background color (in seconds where, 1000 === 1 sec).
+- In the JavaScript file, you should set the background color to a randomly generated color for a given time interval (time interval input from user). Start by implementing a background color change every three seconds (default). You should implement a button that allows the user to 'stop' and 'start' the background color change. Once the background color change is stopped, the user should be able to specify a new interval for changing the background color (in seconds where, 1000 === 1 sec).
   - The solution should only implement one button; use different styles to toggle between 'start' and 'stop'.
   - Full colors tend to be harsh on the eyes. Instead of using full colors, generate rgba() or hsla() colors and dim the value of the alpha.
 

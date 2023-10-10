@@ -43,6 +43,7 @@ const highlightedWord = function markGivenWordToHighlight(textInput) {
  * for word that does not match input explicitly
  */
 const matchWord = function matchWordEquality(word, inputText) {
+  // em dash, U+2014, &mdash; &#x2014 or &#8212
   switch (word) {
     case inputText:
     case inputText + ".":
