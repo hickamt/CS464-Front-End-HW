@@ -47,7 +47,8 @@ const matchWord = function matchWordEquality(word, inputText) {
     case inputText:
     case inputText + ".":
     case inputText + ",":
-      // case inputText.concat(String.fromCharCode(8212)):
+    case inputText.concat(String.fromCharCode(8212) + "in"):
+    case "way".concat(String.fromCharCode(8212) + inputText):
       return true;
     default:
       return false;
