@@ -10,9 +10,7 @@ const startButton = function timeStartButton() {
   document.getElementById("start-stop-btn-container").innerHTML;
 };
 
-const toggleButton = function switchStartStopButton() {
-
-};
+const toggleButton = function switchStartStopButton() {};
 
 addEventListener("click", (event) => {
   let defaultTime = 3000; // 3 seconds
@@ -21,7 +19,7 @@ addEventListener("click", (event) => {
     while (changeColor) {
       document.getElementById("body").style.backgroundColor = "blue";
       setTimeout(() => {
-        document.getElementById("body").style.backgroundColor = "black"
+        document.getElementById("body").style.backgroundColor = "black";
       }, defaultTime);
     }
   } catch (error) {
