@@ -1,5 +1,7 @@
 /* 
-  Function will highlight matching words for a given paragraph
+  Program to highlight matching words for the given paragraph below.
+  This paragraph would be part of a server api call but is statically
+  typed here for front end testing of the functions
 */
 
 const originalParagraph = `It was the best of times, it was the worst of times, it was the age of
@@ -12,6 +14,7 @@ const originalParagraph = `It was the best of times, it was the worst of times, 
         noisiest authorities insisted on its being received, for good or for
         evil, in the superlative degree of comparison only.`;
 
+// Standard message error
 const m_error = {
   message: "Invalid input, please enter a word to highlight",
 };
@@ -36,7 +39,7 @@ const highlightedWord = function markGivenWordToHighlight(textInput) {
 /**
  * checks for equality of the word.toLowerCase() with
  * inputText.toLowerCase() including words appended with:
- * word + '.' OR word + ',' or word + '-'
+ * word + '.' OR word + ',' or word + 'em dash'
  * @param word is a single word from mapped array
  * @param inputText is the user word to search for
  * @returns boolean true for exact equality or false
@@ -81,6 +84,7 @@ const buildParagraph = function mapAndBuildNewParagraph(
  * Builds a new paragraph with highlighted words based on textinput
  * @param textInput user input
  * @param paragraph DOM paragraph to be searched/modified
+ * @split (/\s+/) for one or more spaces
  */
 const displayHighlightedParagraph = function setNewParagraphToInnerHTML(
   textInput,
@@ -107,18 +111,11 @@ const displayHighlightedParagraph = function setNewParagraphToInnerHTML(
  * a new error() message is thrown
  */
 const validate = function validateInput(textInput) {
-  if (/[^a-z^A-Z^\/.\^\/,\^\/-]/gim.test(textInput)) {
+  if (/[^a-z^A-Z^\/.\^\/,\^\/—]/gim.test(textInput)) {
     document.getElementById("input-feedback").style.visibility = "visible";
     throw new Error(m_error.message);
   }
   return textInput;
-};
-
-/**
- * Upon each 'keydown' event, clear and reset the paragraph
- */
-const resetParagraph = function resetHighlightedParagraphToOriginal() {
-  document.getElementById("paragraph").innerHTML = originalParagraph;
 };
 
 /**
@@ -127,10 +124,9 @@ const resetParagraph = function resetHighlightedParagraphToOriginal() {
  */
 addEventListener("keydown", (event) => {
   try {
-    document.getElementById("input-feedback").style.visibility = "hidden";
     setTimeout(() => {
+      document.getElementById("input-feedback").style.visibility = "hidden";
       const textInput = event.target.value;
-      resetParagraph();
       validate(textInput);
       displayHighlightedParagraph(textInput, originalParagraph);
     }, 10);
