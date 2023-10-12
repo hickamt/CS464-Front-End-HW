@@ -42,10 +42,30 @@ const changeColor = function changeBodyBackgroundColor() {
 };
 
 addEventListener("load", (event) => {
-  let defaultInterval = 3000; // 3 seconds
+  let defaultInterval = 1000000; // 3 seconds
 
   setInterval(() => {
-    changeColor(); 
+    changeColor();
   }, defaultInterval);
-
 });
+
+const toggleButton = function changeBetweenStartAndStopButtons(
+  buttonEventValue
+) {
+  const intButton = document.getElementById("interval-button");
+  if (buttonEventValue === "stop") {
+    intButton.setAttribute("value", "start");
+    intButton.innerHTML = "Start";
+    intButton.className =
+      "btn btn-primary bg-primary mt-3 d-flex border-0 bg-primary btn-md";
+  } else {
+    intButton.setAttribute("value", "stop");
+    intButton.innerHTML = "Stop";
+    intButton.className =
+      "btn btn-danger bg-danger mt-3 d-flex border-0 bg-primary btn-md";
+  }
+};
+
+addEventListener('click', (event) => {
+  toggleButton(event.target.value)
+})
