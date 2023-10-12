@@ -24,6 +24,7 @@
           <span id="input-feedback" class="text-danger fs-5" style="visibility: hidden;">Invalid_Entry: please enter a word.
       </div>
       <hr />
+      <div id="highlighted" style="visibility: hidden;"></div>
       <div id="paragraph" style="visibility: visible;">
         It was the best of times, it was the worst of times, it was the age of
         wisdom, it was the age of foolishness, it was the epoch of belief, it

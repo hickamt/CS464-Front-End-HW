@@ -5,18 +5,27 @@
 */
 
 const originalParagraph = `It was the best of times, it was the worst of times, it was the age of
-wisdom, it was the age of foolishness, it was the epoch of belief, it
-was the epoch of incredulity, it was the season of Light, it was the
-season of Darkness, it was the spring of hope, it was the winter of
-despair, we had everything before us, we had nothing before us, we were
-all going direct to Heaven, we were all going direct the other way—in
-short, the period was so far like the present period, that some of its
-noisiest authorities insisted on its being received, for good or for
-evil, in the superlative degree of comparison only.`;
+        wisdom, it was the age of foolishness, it was the epoch of belief, it
+        was the epoch of incredulity, it was the season of Light, it was the
+        season of Darkness, it was the spring of hope, it was the winter of
+        despair, we had everything before us, we had nothing before us, we were
+        all going direct to Heaven, we were all going direct the other way—in
+        short, the period was so far like the present period, that some of its
+        noisiest authorities insisted on its being received, for good or for
+        evil, in the superlative degree of comparison only.`;
 
 // Standard message error
 const m_error = {
   message: "Invalid input, please enter a word to highlight",
+};
+
+/**
+ * Function that creates a Regular Expression based on textInput with 'g' global flag
+ * @param textInput user input word to find in the paragraph
+ * @returns the regular expression function
+ */
+const regExInput = function findWordUsingRegularExpression(textInput) {
+  return new RegExp(textInput, "g");
 };
 
 /**
@@ -28,8 +37,9 @@ const highlightedWord = function markGivenWordToHighlight(textInput) {
 };
 
 /**
- * split and match on individual word that may
- * contain em dash, comma, or period.
+ * checks for equality of the word.toLowerCase() with
+ * inputText.toLowerCase() including words appended with:
+ * word + '.' OR word + ',' or word + 'em dash'
  * @param word is a single word from mapped array
  * @param inputText is the user word to search for
  * @returns boolean true for exact equality or false
@@ -43,6 +53,17 @@ const matchWord = function matchWordEquality(word, inputText) {
     }
   });
   return matchedWord;
+
+  // switch (splitWord) {
+  //   case inputText:
+  //   case inputText + ".":
+  //   case inputText + ",":
+  //   case inputText.concat(String.fromCharCode(8212) + "in"):
+  //   case "way".concat(String.fromCharCode(8212) + inputText):
+  //     return true;
+  //   default:
+  //     return false;
+  // }
 };
 
 /**
@@ -58,13 +79,15 @@ const buildParagraph = function mapAndBuildNewParagraph(
 ) {
   return paragraphArray
     .map((word) => {
-      if (matchWord(word, textInput)) {
+      if (matchWord(word.toLowerCase(), textInput.toLowerCase())) {
+        // return word.replace(regExInput(textInput), highlightedWord(textInput));
         return word.replace(textInput, highlightedWord(textInput));
       } else {
         return word;
       }
     })
-    .join(" ");
+    .join(" ")
+    .trim();
 };
 
 /**
@@ -75,11 +98,17 @@ const buildParagraph = function mapAndBuildNewParagraph(
  */
 const displayHighlightedParagraph = function setNewParagraphToInnerHTML(
   textInput,
-  splitParagraph
+  paragraph
 ) {
+  // const highlightedParagraph = document.getElementById("highlighted");
+  // highlightedParagraph.innerHTML = "";
+  // highlightedParagraph.innerHTML = buildParagraph(textInput, paragraph.split(/\s+/));
+  // document.getElementById('paragraph').style.visibility = "hidden"
+  // highlightedParagraph.style.visibility = "visible"
+
   document.getElementById("paragraph").innerHTML = buildParagraph(
     textInput,
-    splitParagraph
+    paragraph.split(/\s+/)
   );
 };
 
@@ -112,16 +141,16 @@ const validate = function validateInput(textInput) {
 addEventListener("keydown", (event) => {
   if (event.key === "Backspace") {
     document.getElementById("paragraph").innerHTML = originalParagraph;
-  } else {
-    try {
-      setTimeout(() => {
-        document.getElementById("input-feedback").style.visibility = "hidden";
-        const textInput = event.target.value;
-        validate(textInput);
-        displayHighlightedParagraph(textInput, originalParagraph.split(/\s+/));
-      }, 10);
-    } catch (error) {
-      console.error(error);
-    }
+  }
+  try {
+    setTimeout(() => {
+      document.getElementById("input-feedback").style.visibility = "hidden";
+      document.getElementById("paragraph").style.visibility = "visible";
+      const textInput = event.target.value;
+      validate(textInput);
+      displayHighlightedParagraph(textInput, originalParagraph);
+    }, 10);
+  } catch (error) {
+    console.error(error);
   }
 });
