@@ -7,7 +7,7 @@
  */
 
 /**
- * Custom USE State Functionality
+ * The React Library useState() method
  * Source: https://stackoverflow.com/questions/64744252/how-to-replicate-usestate-with-vanilla-js
  */
 const useState = (defaultValue) => {
@@ -17,7 +17,17 @@ const useState = (defaultValue) => {
   return [getValue, setValue];
 };
 
+/**
+ * timeInterval is the time in milliseconds, devault = 3 seconds
+ * setTimeInterval is used to change the state of the time
+ */
 const [timeInterval, setTimeInterval] = useState(3000);
+
+/**
+ * @param intervalID is the id returned from setInterval() JS library method
+ * This ID is used to clear the state for an onClick() document event
+ * @param setIntervalID is used to capture the returned ID from setInterval()
+ */
 const [intervalID, setIntervalID] = useState(null);
 
 /**
@@ -102,8 +112,7 @@ const convertInputTime = function convertInputInSecondsToMilliseconds() {
 };
 
 /**
- * On a new error, this method is called to clear the error
- * message field on any click event
+ * Function will clear the input field after selecting "Start" | "Stop"
  */
 const clearInputValue = function clearUserInputValueOnError() {
   document.getElementById("input-seconds").value = "";
@@ -117,11 +126,12 @@ const outError = function showErrorMessage(error) {
   document.getElementById("input-error").innerHTML = error;
 };
 
-// Clears the error message
+/**
+ * Clear the new throw error message by setting the innerHTML to {empty}
+ */
 const clearError = function clearMessageError() {
   document.getElementById("input-error").innerHTML = "";
 };
-
 
 // Window Load Event Listener activates the timed background color change
 window.addEventListener("load", startColorChange);
