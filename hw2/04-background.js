@@ -41,6 +41,7 @@ const changeColor = function changeBodyBackgroundColor() {
   document.getElementById("body").style.backgroundColor = getRGBA(0, 175);
 };
 
+// Window Load Event Listener activates the timed background color change
 addEventListener("load", (event) => {
   let defaultInterval = 1000000; // 3 seconds
 
@@ -49,23 +50,29 @@ addEventListener("load", (event) => {
   }, defaultInterval);
 });
 
+/**
+ * Modifies the interval button between 'Stop' and 'Start'
+ * @param btnEventValue string value to change button to
+ */
 const toggleButton = function changeBetweenStartAndStopButtons(
-  buttonEventValue
+  btnEventValue = "Start"
 ) {
-  const intButton = document.getElementById("interval-button");
-  if (buttonEventValue === "stop") {
-    intButton.setAttribute("value", "start");
-    intButton.innerHTML = "Start";
-    intButton.className =
-      "btn btn-primary bg-primary mt-3 d-flex border-0 bg-primary btn-md";
-  } else {
-    intButton.setAttribute("value", "stop");
-    intButton.innerHTML = "Stop";
-    intButton.className =
-      "btn btn-danger bg-danger mt-3 d-flex border-0 bg-primary btn-md";
-  }
+  const btnElement = document.getElementById("interval-button");
+  btnElement.setAttribute("value", btnEventValue);
+  btnElement.innerHTML = btnEventValue;
+  btnElement.className =
+    btnEventValue === "Start"
+      ? "btn btn-primary bg-primary mt-3 d-flex border-0 bg-primary btn-md"
+      : "btn btn-danger bg-danger mt-3 d-flex border-0 bg-primary btn-md";
 };
 
-addEventListener('click', (event) => {
-  toggleButton(event.target.value)
-})
+/**
+ * Event listener for interval button
+ */
+addEventListener("click", (event) => {
+  try {
+    toggleButton(event.target.value === "Start" ? "Stop" : "Start");
+  } catch (error) {
+    console.error(error);
+  }
+});
