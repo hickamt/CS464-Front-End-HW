@@ -64,9 +64,6 @@ const startColorChange = function startBackgroundColorChange() {
   );
 };
 
-// Window Load Event Listener activates the timed background color change
-window.addEventListener("load", startColorChange);
-
 /**
  * Changes the button className using Bootstrap 5 styling
  * @param btnEventValue is either "Start" or "Stop"
@@ -93,16 +90,21 @@ const toggleButton = function changeBetweenStartAndStopButtons(
   btnElement.className = setBtnClassName(btnEventValue);
 };
 
-// convert positive integer in seconds (greater than zero) to milliseconds
-// returns the conversion interval if greater than or equal to 1000 ms
-// if not greater than or equal to 1000, default return is 3000 ms
+/**
+ * Convert positive integer in seconds (greater than zero) to milliseconds
+ * @returns the conversion interval if greater than or equal to 1000 ms
+ * if not greater than or equal to 1000, default return is 3000 ms
+ */
 const convertInputTime = function convertInputInSecondsToMilliseconds() {
   const ms_interval = document.getElementById("input-seconds").value * 1000;
   if (ms_interval >= 1000) return ms_interval;
   throw new Error("Enter a postive integer greater than or equal to (1)");
 };
 
-// On error, clear the input field
+/**
+ * On a new error, this method is called to clear the error
+ * message field on any click event
+ */
 const clearInputValue = function clearUserInputValueOnError() {
   document.getElementById("input-seconds").value = "";
 };
@@ -120,7 +122,11 @@ const clearError = function clearMessageError() {
   document.getElementById("input-error").innerHTML = "";
 };
 
-// button event listener
+
+// Window Load Event Listener activates the timed background color change
+window.addEventListener("load", startColorChange);
+
+// On Click Button Event Listener
 document.addEventListener("click", (event) => {
   clearError();
   if (event.target.value === "Start") {
