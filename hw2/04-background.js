@@ -7,6 +7,20 @@
  */
 
 /**
+ * Custom USE State Functionality
+ * Source: https://stackoverflow.com/questions/64744252/how-to-replicate-usestate-with-vanilla-js
+ */
+const useState = (defaultValue) => {
+  let value = defaultValue;
+  const getValue = () => value;
+  const setValue = (updateValue) => (value = updateValue);
+  return [getValue, setValue];
+};
+
+const [timeInterval, setTimeInterval] = useState(3000);
+const [intervalID, setIntervalID] = useState(null);
+
+/**
  * Generate a pseudo random value within a range [min, max]
  * @param min value for lower range (inclusive)
  * @param max value for upper range (inclusive)
@@ -37,21 +51,37 @@ const getRGBA = function getRandomGeneratedRgbaColor(min = 0, max = 175) {
 /**
  * Get random rgba() color and set to 'body' background color
  */
-const changeColor = function changeBodyBackgroundColor() {
+const changeBgColor = function changeBodyBackgroundColor() {
   document.getElementById("body").style.backgroundColor = getRGBA(0, 175);
 };
 
-// Window Load Event Listener activates the timed background color change
-addEventListener("load", (event) => {
-  let defaultInterval = 1000000; // 3 seconds
+// Begins the background color change and sets the time interval id state
+const startColorChange = function startBackgroundColorChange() {
+  setIntervalID(
+    setInterval(() => {
+      changeBgColor();
+    }, timeInterval())
+  );
+};
 
-  setInterval(() => {
-    changeColor();
-  }, defaultInterval);
-});
+// Window Load Event Listener activates the timed background color change
+window.addEventListener("load", startColorChange);
 
 /**
- * Modifies the interval button between 'Stop' and 'Start'
+ * Changes the button className using Bootstrap 5 styling
+ * @param btnEventValue is either "Start" or "Stop"
+ * @returns the bootstrap 5 class name
+ */
+const setBtnClassName = function setButtonClassName(btnEventValue) {
+  return btnEventValue === "Start"
+    ? "btn btn-primary bg-primary mt-3 d-flex border-0 bg-primary btn-md"
+    : "btn btn-danger bg-danger mt-3 d-flex border-0 bg-primary btn-md";
+};
+
+/**
+ * NOTE: toggle function expects that you are passing
+ * the parameter value you want to set all button properties to:
+ * i.e. if you want a stop button, pass "Stop"
  * @param btnEventValue string value to change button to
  */
 const toggleButton = function changeBetweenStartAndStopButtons(
@@ -60,19 +90,54 @@ const toggleButton = function changeBetweenStartAndStopButtons(
   const btnElement = document.getElementById("interval-button");
   btnElement.setAttribute("value", btnEventValue);
   btnElement.innerHTML = btnEventValue;
-  btnElement.className =
-    btnEventValue === "Start"
-      ? "btn btn-primary bg-primary mt-3 d-flex border-0 bg-primary btn-md"
-      : "btn btn-danger bg-danger mt-3 d-flex border-0 bg-primary btn-md";
+  btnElement.className = setBtnClassName(btnEventValue);
+};
+
+// convert positive integer in seconds (greater than zero) to milliseconds
+// returns the conversion interval if greater than or equal to 1000 ms
+// if not greater than or equal to 1000, default return is 3000 ms
+const convertInputTime = function convertInputInSecondsToMilliseconds() {
+  const ms_interval = document.getElementById("input-seconds").value * 1000;
+  if (ms_interval >= 1000) return ms_interval;
+  throw new Error("Enter a postive integer greater than or equal to (1)");
+};
+
+// On error, clear the input field
+const clearInputValue = function clearUserInputValueOnError() {
+  document.getElementById("input-seconds").value = "";
 };
 
 /**
- * Event listener for interval button
+ * Create the inner html user error message
+ * @param error is the message thrown
  */
-addEventListener("click", (event) => {
-  try {
-    toggleButton(event.target.value === "Start" ? "Stop" : "Start");
-  } catch (error) {
-    console.error(error);
+const outError = function showErrorMessage(error) {
+  document.getElementById("input-error").innerHTML = error;
+};
+
+// Clears the error message
+const clearError = function clearMessageError() {
+  document.getElementById("input-error").innerHTML = "";
+};
+
+// button event listener
+document.addEventListener("click", (event) => {
+  clearError();
+  if (event.target.value === "Start") {
+    try {
+      setTimeInterval(convertInputTime());
+      clearInputValue();
+      clearInterval(intervalID());
+      startColorChange();
+      toggleButton("Stop");
+    } catch (error) {
+      clearInputValue();
+      outError(error);
+      console.error(error);
+    }
+  } else {
+    clearInterval(intervalID());
+    clearInputValue();
+    toggleButton("Start");
   }
 });
