@@ -9,7 +9,7 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
     <script defer src="04-background.js"></script>
   </head>
-  <body id="body" class="bg-dark text-light">
+  <body id="body" class="fs-5" style="background-color: rgba(30, 130, 30, 0.8);">
     <main>
       <h1>Exercise 04 - Background</h1>
       <p>
@@ -18,10 +18,12 @@
         background color changes.
       </p>
       <div>
-        <label for="input-seconds">Background change interval (seconds): </label>
+        <label for="input-seconds"
+          >Background change interval (seconds):
+        </label>
         <input id="input-seconds" type="number" required />
         <div id="start-stop-btn-container" class="btn">
-          <button  onclick="handleTime(event)">Start</button>
+          <button onclick="handleTime(event)">Start</button>
         </div>
       </div>
       <div>
