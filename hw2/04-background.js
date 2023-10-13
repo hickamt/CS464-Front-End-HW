@@ -50,11 +50,11 @@ const getRandomValue = function getRandomValueUsingInclusiveRange(min, max) {
  * @param max value for upper range (inclusive)
  * @returns rgba(val, val, val, 0.1)
  */
-const getRGBA = function getRandomGeneratedRgbaColor(min = 0, max = 175) {
+const getRGBA = function getRandomGeneratedRgbaColor(min = 0, max = 255) {
   return `rgba(
-    ${getRandomValue(min, max)},
-    ${getRandomValue(min, max)},
-    ${getRandomValue(min, max)},
+    ${getRandomValue(min, getRandomValue(100, max))},
+    ${getRandomValue(min, getRandomValue(100, max))},
+    ${getRandomValue(min, getRandomValue(125, max))},
     0.8)`;
 };
 
