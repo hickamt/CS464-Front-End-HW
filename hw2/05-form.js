@@ -15,20 +15,54 @@
  * Comments:
  */
 
+const submitMessage = {
+  name: "Full Name: ",
+  email: "Email: ",
+  regStatus: "Registration Status: ",
+  courses: "Courses Taken: ",
+  comment: "Comments: ",
+  className: 'class="fw-4 fw-bold p-2"',
+};
+
+const displayMessage = function createHTMLDivDisplay({
+  className,
+  name,
+  email,
+  regStatus,
+  courses,
+  comment,
+}) {
+  return `<div ${className}>
+  <h1>Submission</h1>
+  <p>${name}</p>
+  <p>${email}</p>
+  <p>${regStatus}</p>
+  <p>${courses}</p>
+  <p>${comment}</p>
+  </div>`;
+};
+
 document
   .getElementById("registration-form")
   .addEventListener("submit", (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const formValues = Object.fromEntries(formData.entries());
-    console.log("Name: ", formValues.name);
-    console.log("Email: ", formValues.email);
-    console.log("Registration: ", formValues.registration);
+
+    submitMessage.name += formValues.name;
+    submitMessage.email += formValues.email;
+    submitMessage.regStatus += formValues.registration;
+    submitMessage.comment += formValues.textArea;
 
     const courses = document.querySelectorAll("input");
     for (let course of courses) {
       if (course.checked) {
-        console.log(course.value);
+        submitMessage.courses += ` ${course.value}`;
       }
     }
+
+    document.getElementById("registration-form").innerHTML =
+      displayMessage(submitMessage);
+
+    console.log(submitMessage)
   });

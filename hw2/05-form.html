@@ -15,7 +15,7 @@
       <form id="registration-form" class="py-4 px-3" action="">
         <h1 class="text-center mb-4">Exercise 05 - Form</h1>
         <div class="mb-3">
-          <label class="form-label fw-bold" for="name">Full Name:</label>
+          <label class="form-label fw-bold" for="name" aria-label="enter full name">Full Name:</label>
           <input
             class="form-control"
             type="text"
@@ -24,7 +24,7 @@
             required />
         </div>
         <div class="mb-3">
-          <label class="form-label fw-bold" for="email">Email:</label>
+          <label class="form-label fw-bold" for="email" aria-label="enter your email">Email:</label>
           <input
             class="form-control"
             type="email"
@@ -34,12 +34,12 @@
             required />
         </div>
         <div class="fw-3 fw-bold mb-2">Registration Status:</div>
-        <select name="registration" id="registration" class="form-select">
-          <option value="" selected disabled>Choose an Option</option>
+        <select name="registration" id="registration" class="form-select" aria-label="choose registration status">
+          <option value="choose-an-option" selected disabled>Choose an Option</option>
           <option value="full-time">Full-Time</option>
           <option value="part-time">Part-Time</option>
         </select>
-        <fieldset id="courses" name="courses">
+        <fieldset id="courses" name="courses" aria-label="select courses taken">
           <legend class="fs-6 fw-bold pt-3">
             Have you taken any of the following courses?
           </legend>
@@ -72,12 +72,12 @@
           </div>
         </fieldset>
         <div class="my-3">
-          <label for="text-area" class="fw-bold form-label">
+          <label for="text-area" class="fw-bold form-label" aria-label="other comments text area">
             Anything Else?
           </label>
           <textarea
-            name="text-area"
-            id="text-area"
+            name="textArea"
+            id="textArea"
             cols="30"
             rows="3"
             class="form-control"></textarea>
