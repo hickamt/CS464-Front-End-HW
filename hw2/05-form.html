@@ -10,7 +10,7 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
     <script defer src="05-form.js"></script>
   </head>
-  <body class="bg-dark">
+  <body id="body" class="bg-dark">
     <main class="w-50 mx-auto rounded bg-light mt-5">
       <form id="form" class="py-4 px-3">
         <h1 class="text-center mb-4">Exercise 05 - Form</h1>
@@ -104,15 +104,16 @@
         <div class="d-flex gap-1 mt-4 justify-content-center">
           <button
             id="submit"
-            class="btn w-50 btn-primary btn-block"
+            class="btn submit w-50 btn-primary btn-block"
             type="submit"
             value="submit">
             Submit
           </button>
           <button
             id="reset"
-            class="btn w-50 btn-secondary btn-block"
-            type="reset">
+            class="btn reset w-50 btn-secondary btn-block"
+            type="reset"
+            value="reset">
             Reset
           </button>
         </div>

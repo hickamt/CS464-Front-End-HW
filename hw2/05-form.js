@@ -47,26 +47,23 @@ document
   .addEventListener("submit", (event) => {
 
     event.preventDefault();
-    console.log(submitMessage)
-    // document.getElementById('reset').reset();
-    // document.getElementById('form').reset();
 
-    // const formData = new FormData(event.target);
-    // const formValues = Object.fromEntries(formData.entries());
+    const formData = new FormData(event.target);
+    const formValues = Object.fromEntries(formData.entries());
 
-    // submitMessage.name += formValues.name;
-    // submitMessage.email += formValues.email;
-    // submitMessage.regStatus += formValues.registration;
-    // submitMessage.comment += formValues.textArea;
+    submitMessage.name += formValues.name;
+    submitMessage.email += formValues.email;
+    submitMessage.regStatus += formValues.registration;
+    submitMessage.comment += formValues.textArea;
 
-    // const courses = document.querySelectorAll("input");
-    // for (let course of courses) {
-    //   if (course.checked) {
-    //     submitMessage.courses += ` ${course.value}`;
-    //   }
-    // }
+    const courses = document.querySelectorAll("input");
+    for (let course of courses) {
+      if (course.checked) {
+        submitMessage.courses += ` ${course.value}`;
+      }
+    }
 
-    // document.getElementById("registration-form").innerHTML =
-    //   displayMessage(submitMessage);
+    console.table(submitMessage)
+    document.getElementById('reset').click();
 
   });
