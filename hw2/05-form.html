@@ -12,10 +12,15 @@
   </head>
   <body class="bg-dark">
     <main class="w-50 mx-auto rounded bg-light mt-5">
-      <form id="registration-form" class="py-4 px-3" action="">
+      <form id="form" class="py-4 px-3">
         <h1 class="text-center mb-4">Exercise 05 - Form</h1>
         <div class="mb-3">
-          <label class="form-label fw-bold" for="name" aria-label="enter full name">Full Name:</label>
+          <label
+            class="form-label fw-bold"
+            for="name"
+            aria-label="enter full name"
+            >Full Name:</label
+          >
           <input
             class="form-control"
             type="text"
@@ -24,7 +29,12 @@
             required />
         </div>
         <div class="mb-3">
-          <label class="form-label fw-bold" for="email" aria-label="enter your email">Email:</label>
+          <label
+            class="form-label fw-bold"
+            for="email"
+            aria-label="enter your email"
+            >Email:</label
+          >
           <input
             class="form-control"
             type="email"
@@ -34,8 +44,14 @@
             required />
         </div>
         <div class="fw-3 fw-bold mb-2">Registration Status:</div>
-        <select name="registration" id="registration" class="form-select" aria-label="choose registration status">
-          <option value="choose-an-option" selected disabled>Choose an Option</option>
+        <select
+          name="registration"
+          id="registration"
+          class="form-select"
+          aria-label="choose registration status">
+          <option value="choose-an-option" selected disabled>
+            Choose an Option
+          </option>
           <option value="full-time">Full-Time</option>
           <option value="part-time">Part-Time</option>
         </select>
@@ -72,7 +88,10 @@
           </div>
         </fieldset>
         <div class="my-3">
-          <label for="text-area" class="fw-bold form-label" aria-label="other comments text area">
+          <label
+            for="text-area"
+            class="fw-bold form-label"
+            aria-label="other comments text area">
             Anything Else?
           </label>
           <textarea
@@ -87,14 +106,13 @@
             id="submit"
             class="btn w-50 btn-primary btn-block"
             type="submit"
-            value="Submit">
+            value="submit">
             Submit
           </button>
           <button
             id="reset"
             class="btn w-50 btn-secondary btn-block"
-            type="reset"
-            value="Reset">
+            type="reset">
             Reset
           </button>
         </div>
