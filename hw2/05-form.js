@@ -1,69 +1,53 @@
-/**
- * get form id 'registration-form' and set
- * innerHTML = new body showing all values submitted
- * form[0].reset();
- */
-
-// const form = document.getElementById('registration-form');
+// Function that consoles the form submission field index and value
 
 /**
- * Full Name: (name)
- * Email: (email)
- * Registration Status:
- * Have you taken any of the following courses?
- * (program-language, operating-systems, full-stack-web-dev)
- * Comments:
+ * The React Library useState() method
+ * Source: https://stackoverflow.com/questions/64744252/how-to-replicate-usestate-with-vanilla-js
  */
-
-const submitMessage = {
-  name: "Full Name: ",
-  email: "Email: ",
-  regStatus: "Registration Status: ",
-  courses: "Courses Taken: ",
-  comment: "Comments: ",
-  className: 'class="fw-4 fw-bold p-2"',
+const useState = (defaultValue) => {
+  let value = defaultValue;
+  const getValue = () => value;
+  const setValue = (updateValue) => (value = updateValue);
+  return [getValue, setValue];
 };
 
-const displayMessage = function createHTMLDivDisplay({
-  className,
-  name,
-  email,
-  regStatus,
-  courses,
-  comment,
-}) {
-  return `<div ${className}>
-  <h1>Submission</h1>
-  <p>${name}</p>
-  <p>${email}</p>
-  <p>${regStatus}</p>
-  <p>${courses}</p>
-  <p>${comment}</p>
-  </div>`;
-};
+const [formData, setFormData] = useState({});
+const [formValues, setFormValues] = useState({});
+const [message, setMessage] = useState({});
 
-document
-  .getElementById("form")
-  .addEventListener("submit", (event) => {
-
-    event.preventDefault();
-
-    const formData = new FormData(event.target);
-    const formValues = Object.fromEntries(formData.entries());
-
-    submitMessage.name += formValues.name;
-    submitMessage.email += formValues.email;
-    submitMessage.regStatus += formValues.registration;
-    submitMessage.comment += formValues.textArea;
-
-    const courses = document.querySelectorAll("input");
-    for (let course of courses) {
-      if (course.checked) {
-        submitMessage.courses += ` ${course.value}`;
-      }
+const setCourses = function getSelectedCourses() {
+  const courses = document.querySelectorAll("input");
+  for (let course of courses) {
+    if (course.checked) {
+      message().courses += `${course.value} `;
     }
+  }
+};
 
-    console.table(submitMessage)
-    document.getElementById('reset').click();
-
+const setConsoleMessage = function setConsoleLogMessage() {
+  setMessage({
+    name: formValues().name,
+    email: formValues().email,
+    regStatus: formValues().registration,
+    courses: "",
+    comment: formValues().textArea,
   });
+};
+
+const clearField = () => {
+  document.getElementById("reset").click();
+};
+
+document.getElementById("form").addEventListener("submit", (event) => {
+  event.preventDefault();
+  try {
+    setFormData(new FormData(event.target));
+    setFormValues(Object.fromEntries(formData().entries()));
+    setConsoleMessage(formValues());
+    setCourses();
+    console.table(message());
+    clearField();
+  } catch (error) {
+    console.log(error);
+  }
+});
