@@ -142,7 +142,7 @@ document.addEventListener("click", (event) => {
   if (event.target.value === "Start") {
     try {
       setTimeInterval(convertInputTime());
-      clearInputValue();
+      // clearInputValue();
       clearInterval(intervalID());
       startColorChange();
       toggleButton("Stop");

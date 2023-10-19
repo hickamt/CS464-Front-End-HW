@@ -52,3 +52,11 @@ document.getElementById("form").addEventListener("submit", (event) => {
   }
 });
 
+const highlightWords = function highlightWords() {
+  const words = document.querySelectorAll("p");
+  for (let word of words) {
+    if (word.textContent.includes("JavaScript")) {
+      word.style.color = "red";
+    }
+  }
+};
