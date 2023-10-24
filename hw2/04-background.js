@@ -136,8 +136,9 @@ const clearError = function clearMessageError() {
 // Window Load Event Listener activates the timed background color change
 window.addEventListener("load", startColorChange);
 
-// On Click Button Event Listener
-document.addEventListener("click", (event) => {
+// NOTE: Changing document.addEventListner() to document.getElementById('body')
+// stopped the onClick event from firing for all mouse events outside of the form.
+document.getElementById("body").addEventListener("click", (event) => {
   clearError();
   if (event.target.value === "Start") {
     try {
@@ -153,7 +154,6 @@ document.addEventListener("click", (event) => {
     }
   } else {
     clearInterval(intervalID());
-    clearInputValue();
     toggleButton("Start");
   }
 });
