@@ -24,7 +24,7 @@ const m_error = {
  * @returns html element <mark>textInput</mark>
  */
 const highlightedWord = function markGivenWordToHighlight(textInput) {
-  return `<mark>${textInput}</mark>`;
+  return `<mark style="background-color: yellow">${textInput}</mark>`;
 };
 
 /**
