@@ -28,20 +28,20 @@ const borderColors = [
 
 /**
  * Renders the chart data 'nameAndcount' as a doughnut chart
- * @param nameAndCount contains the family name and length of name
+ * @param familyNameAndCount contains the family name and length of name
  */
-const renderChart = (nameAndCount) => {
+const renderChart = (familyNameAndCount) => {
   const donutChart = document.querySelector(".donut-chart");
 
   new Chart(donutChart, {
     type: "doughnut",
     data: {
       // labels will be an array of family names
-      labels: nameAndCount.map((name) => name.familyName),
+      labels: familyNameAndCount.familyName,
       datasets: [
         {
           label: "Family Name & Length",
-          data: nameAndCount.map((name) => name.count),
+          data: familyNameAndCount.count,
           backgroundColor: backgroundColors,
           borderColor: borderColors,
           borderWidth: 1,
@@ -51,17 +51,6 @@ const renderChart = (nameAndCount) => {
   });
 };
 
-const filterRepeatedNames = (data) => {
-  const uniqueNames = [];
-  data.map((character) => {
-    const familyName = character.family.split("House").join("").trim();
-    if (!uniqueNames.includes(familyName)) {
-      uniqueNames.push(familyName);
-    }
-  });
-  return uniqueNames;
-};
-
 /**
  * Seperates the family name from data
  * Sets family name and length of name to new data array
@@ -69,20 +58,28 @@ const filterRepeatedNames = (data) => {
  * @returns nameAndCount array with family name and length of name
  */
 const getChartData = function setFamilyNameAndLengthOfName(data) {
-  const uniqueNames = [];
+  const names = [];
+  const nameCount = [];
+  let familyNameAndCount = {};
 
   if (data) {
     data.map((character) => {
+      // push only unique family names to names array
       const familyName = character.family.split("House").join("").trim();
-      if (!uniqueNames.includes(familyName)) {
-        uniqueNames.push({
-          familyName: familyName,
-          count: familyName.length,
-        });
+      if (!names.includes(familyName)) {
+        names.push(familyName);
       }
     });
+    // loop through names array and count the length of each name
+    names.map((name) => {
+      nameCount.push(name.length);
+    })
+    familyNameAndCount = {
+      familyName: names,
+      count: nameCount
+    }
   }
-  return uniqueNames;
+  return familyNameAndCount
 };
 
 /**
