@@ -24,16 +24,16 @@ const getRGBA = function getRandomGeneratedRgbaColor(
   alpha = 0.5
 ) {
   return `rgba(
-    ${getRandomValue(min, getRandomValue(100, max))},
-    ${getRandomValue(min, getRandomValue(100, max))},
-    ${getRandomValue(min, getRandomValue(125, max))},
+    ${getRandomValue(min, getRandomValue(10, max))},
+    ${getRandomValue(min, getRandomValue(10, max))},
+    ${getRandomValue(min, getRandomValue(12, max))},
     ${alpha})`;
 };
 
 const backgroundColors = [
   "rgba(54, 162, 235, 0.8)",
   getRGBA(),
-  "rgba(255, 206, 86, 0.8)",
+  "rgba(111, 207, 86, 0.8)",
   getRGBA(),
   "rgba(255, 99, 132, 0.8)",
   getRGBA(),
@@ -52,6 +52,8 @@ const backgroundColors = [
   "rgba(210, 199, 199, 0.8)",
   getRGBA(),
   "rgba(78, 52, 199, 0.8)",
+  getRGBA(),
+  "rgba(83, 13, 255, 0.8)",
   getRGBA(),
 ];
 
@@ -77,6 +79,8 @@ const borderColors = [
   "rgba(210, 199, 199, 1)",
   getRGBA(1),
   "rgba(78, 52, 199, 1)",
+  getRGBA(1),
+  "rgba(55, 192, 192, 1)",
   getRGBA(1),
 ];
 
@@ -144,11 +148,14 @@ const countFamilyNameOccurance = function setTheCountOfFamilyNameOccurances(
  * @param familyNames is an array of all family names from the data API
  * @returns a unique array of family names
  */
-const combineFamilyNames = function combineUniqueFamilyNames(familyNames) {
-  let combinedNames = familyNames.filter((name, index) => {
+const combineFamilyNames = function combineUniqueFamilyNames(
+  familyNames,
+  uniqueFamilyNames
+) {
+  let temp = familyNames.filter((name, index) => {
     return familyNames.indexOf(name) === index;
   });
-  return combinedNames;
+  uniqueFamilyNames.push(...temp);
 };
 
 /**
@@ -168,7 +175,6 @@ const sortAlpha = function sortDataAlphabeticallyAtoZ(data) {
     }
     return 0;
   });
-  console.log(sortedData);
   return sortedData;
 };
 
@@ -179,7 +185,7 @@ const sortAlpha = function sortDataAlphabeticallyAtoZ(data) {
  * @returns the correct spelling of the family name or returns
  * the original name if no match for known misspellings are found
  */
-const filterSimilarNameSpellings = function filterSimilarNameSpellings(name) {
+const cleanMisspelledNames = function cleanSimilarOrMisspelledNames(name) {
   switch (name) {
     case "Lanister":
     case "Lannister":
@@ -214,15 +220,13 @@ const validateFamilyName = function validateFamilyName(name) {
  * @param familyNames is a temporary array to hold the family names
  * No return object, the 'familyNames' array is passed by reference
  */
-const cleanFamilyName = function filterNamesForEmptyOrMispelled(
+const cleanNamesSpelling = function cleanNamesForEmptyOrMispelled(
   data,
   familyNames
 ) {
   data.map((character) => {
     const familyName = validateFamilyName(
-      filterSimilarNameSpellings(
-        character.family.split("House").join("").trim()
-      )
+      cleanMisspelledNames(character.family.split("House").join("").trim())
     );
     familyNames.push(familyName);
   });
@@ -240,15 +244,15 @@ const cleanFamilyName = function filterNamesForEmptyOrMispelled(
 const getChartData = function setFamilyNameAndLengthOfName(data) {
   const familyNames = [];
   const familyNamesOccurance = [];
-  let uniqueFamilyNames = [];
+  const uniqueFamilyNames = [];
 
   if (data) {
-    // clean and correct spelling of family names
-    cleanFamilyName(data, familyNames);
-    // sort the array of family names alphabetically [a-zA-Z]
+    // set cleaned/filtered names to familyNames array
+    cleanNamesSpelling(data, familyNames);
+    // sort familyNames array alphabetically [a-zA-Z]
     sortAlpha(familyNames);
-    // combine the family names into a new array
-    uniqueFamilyNames = combineFamilyNames(familyNames);
+    // create a unique array of family names from familyNames array
+    combineFamilyNames(familyNames, uniqueFamilyNames);
     // count the number of times a family name occurs and set to FamilyNamesOccurance array
     countFamilyNameOccurance(
       uniqueFamilyNames,
