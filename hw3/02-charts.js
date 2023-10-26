@@ -52,34 +52,82 @@ const renderChart = (familyNameAndCount) => {
 };
 
 /**
+ * function will sort the array of names in alphabetical order
+ * from A to Z [a-zA-Z]
+ * @param data is an array of names
+ * @returns the sorted array of names
+ */
+
+const sortAlpha = function sortDataAlphabeticallyAtoZ(data) {
+  // given data is an array of names, sort alphabetically
+  const sortedData = data.sort((a, b) => {
+    if (a < b) {
+      return -1;
+    }
+    if (a > b) {
+      return 1;
+    }
+    return 0;
+  });
+  console.log(sortedData);
+  return sortedData;
+};
+
+const filterSimilarNameSpellings = function filterSimilarNameSpellings(name) {
+  switch (name) {
+    case "Lanister":
+    case "Lannister":
+      return "Lannister";
+    case 'Lorath':
+    case 'Lorathi':
+      return 'Lorath';
+    case 'Targaryan':
+    case 'Targaryen':
+      return 'Targaryen';
+    default:
+      return name;
+  }
+};
+
+/**
  * Seperates the family name from data
  * Sets family name and length of name to new data array
  * @param data array of charcter objects
  * @returns nameAndCount array with family name and length of name
  */
 const getChartData = function setFamilyNameAndLengthOfName(data) {
-  const names = [];
-  const nameCount = [];
-  let familyNameAndCount = {};
+  const uniqueFamilyNames = [];
+  const familyNameLength = [];
+  let familyNameAndNameLength = {};
 
   if (data) {
     data.map((character) => {
-      // push only unique family names to names array
-      const familyName = character.family.split("House").join("").trim();
-      if (!names.includes(familyName)) {
-        names.push(familyName);
+      // push only unique family uniequeFamilyNames to names array
+      const familyName = filterSimilarNameSpellings(
+        character.family.split("House").join("").trim()
+      );
+      if (
+        familyName === "" ||
+        familyName === "Unknown" ||
+        familyName === "Unkown" ||
+        familyName === "None"
+      )
+        return;
+
+      if (!uniqueFamilyNames.includes(familyName)) {
+        uniqueFamilyNames.push(familyName);
       }
     });
     // loop through names array and count the length of each name
-    names.map((name) => {
-      nameCount.push(name.length);
-    })
-    familyNameAndCount = {
-      familyName: names,
-      count: nameCount
-    }
+    uniqueFamilyNames.map((name) => {
+      familyNameLength.push(name.length);
+    });
+    familyNameAndNameLength = {
+      familyName: sortAlpha(uniqueFamilyNames),
+      count: familyNameLength,
+    };
   }
-  return familyNameAndCount
+  return familyNameAndNameLength;
 };
 
 /**
