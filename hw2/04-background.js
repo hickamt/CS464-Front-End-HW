@@ -18,8 +18,9 @@ const useState = (defaultValue) => {
 };
 
 /**
- * timeInterval is the time in milliseconds, devault = 3 seconds
+ * timeInterval is the time in milliseconds, default = 3 seconds
  * setTimeInterval is used to change the state of the time
+ * it takes for the background color to change
  */
 const [timeInterval, setTimeInterval] = useState(3000);
 

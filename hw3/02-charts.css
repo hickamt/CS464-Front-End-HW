@@ -8,6 +8,12 @@ body {
   background-color: var(--cyan);
 }
 
+main {
+  margin: 0 auto;
+  width: 70%;
+  height: auto;
+}
+
 h1 {
   margin: 3rem 0;
   font-weight: bold;
