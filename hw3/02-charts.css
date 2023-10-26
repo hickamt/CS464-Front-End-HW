@@ -10,18 +10,19 @@ body {
 
 main {
   margin: 0 auto;
-  width: 70%;
+  width: 75%;
   height: auto;
 }
 
 h1 {
-  margin: 3rem 0;
+  display: none;
   font-weight: bold;
   text-align: center;
   color: var(--white);
 }
 
 .donut-chart {
+  margin-top: 5rem;
   padding: 2rem;
   border-radius: 0.8rem;
   background-color: var(--white);
