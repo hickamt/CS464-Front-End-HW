@@ -87,19 +87,18 @@ const borderColors = [
 /**
  * Renders a doughnut chart for each character house name
  * categorized by the number of house name occurances
- * @param familyNameAndCount contains the family name and length of name
+ * @param chartData contains the family name and count of each family name occurance
  */
-const renderChart = (familyNameAndCount) => {
+const renderChart = (chartData) => {
   const donutChart = document.querySelector(".donut-chart");
   new Chart(donutChart, {
     type: "doughnut",
     data: {
-      // labels will be an array of family names
-      labels: familyNameAndCount.familyName,
+      labels: chartData.map((name) => name.familyName),
       datasets: [
         {
           label: "Family Name & Length",
-          data: familyNameAndCount.count,
+          data: chartData.map((name) => name.count),
           backgroundColor: backgroundColors,
           borderColor: borderColors,
           borderWidth: 1,
@@ -127,35 +126,45 @@ const renderChart = (familyNameAndCount) => {
  * Sets the count of each family name occurance to the familyNamesOccurance array
  */
 const countFamilyNameOccurance = function setTheCountOfFamilyNameOccurances(
-  uniqueFamilyNames,
   familyNames,
-  familyNamesOccurance
+  chartData
 ) {
-  uniqueFamilyNames.map((name) => {
+  // for each name in chartData,
+  // search familyNames array for matching names
+  // if match, increment count
+  // set count to chartData.count
+  chartData.map((name) => {
     let count = 0;
     familyNames.map((familyName) => {
-      if (name === familyName) {
-        count++;
+      if (name.familyName === familyName) {
+        ++count;
       }
     });
-    familyNamesOccurance.push(count);
+    name.count = count;
   });
 };
 
 /**
- * Function will combine the family names into a new array
- * creating an array of unique family names
- * @param familyNames is an array of all family names from the data API
- * @returns a unique array of family names
+ * function will combine unique family names into a single array of objects
+ * conaining the family name and count of each family name occurance,
+ * where count is initially set to 0
+ * @param familyNames is an array of all family names from the API
+ * @param chartData is an an empty array
+ * Sets chartData to an array of objects containing the family name and count
  */
 const combineFamilyNames = function combineUniqueFamilyNames(
   familyNames,
-  uniqueFamilyNames
+  chartData
 ) {
   let temp = familyNames.filter((name, index) => {
     return familyNames.indexOf(name) === index;
   });
-  uniqueFamilyNames.push(...temp);
+  temp.map((name) => {
+    chartData.push({
+      familyName: name,
+      count: 0,
+    });
+  });
 };
 
 /**
@@ -164,9 +173,9 @@ const combineFamilyNames = function combineUniqueFamilyNames(
  * @param data is an array of names
  * @returns the sorted array of names
  */
-const sortAlpha = function sortDataAlphabeticallyAtoZ(data) {
+const sortAlpha = function sortDataAlphabeticallyAtoZ(chartData) {
   // given data is an array of names, sort alphabetically
-  const sortedData = data.sort((a, b) => {
+  const sortedData = chartData.sort((a, b) => {
     if (a < b) {
       return -1;
     }
@@ -175,6 +184,30 @@ const sortAlpha = function sortDataAlphabeticallyAtoZ(data) {
     }
     return 0;
   });
+  return sortedData;
+};
+
+/**
+ * Function will sort the chartData array by family count from low to high
+ * @param chartData array of objects containing family name and count
+ * @returns an array sorted in ascending order by count
+ */
+const sortNumericLowHigh = function sortArrayByCountInFamilyNameLowToHigh(
+  chartData
+) {
+  const sortedData = chartData.sort((a, b) => a.count - b.count);
+  return sortedData;
+};
+
+/**
+ * Function will sort the chartData array by family count from high to low
+ * @param chartData array of objects containing family name and count
+ * @returns an array sorted in descending order by count
+ */
+const sortNumericHighLow = function sortArrayByCountInFamilyNameHighToLow(
+  chartData
+) {
+  const sortedData = chartData.sort((a, b) => b.count - a.count);
   return sortedData;
 };
 
@@ -234,36 +267,20 @@ const cleanNamesSpelling = function cleanNamesForEmptyOrMispelled(
 
 /**
  * Clean and seperates the object data by house family name,
- * sorts the array of names alphabetically [a-zA-Z],
- * combines the family names into a new array,
- * and counts the number of times a family name occurs
+ * sorts the array of names by count in family name from high to low
  * @param data array of charcter objects from API
  * @returns an object containing the unique family names
- * and count of each family name occurance
+ * and count of each family name occurance sorted by count high to low
  */
 const getChartData = function setFamilyNameAndLengthOfName(data) {
   const familyNames = [];
-  const familyNamesOccurance = [];
-  const uniqueFamilyNames = [];
+  const chartData = [];
 
   if (data) {
-    // set cleaned/filtered names to familyNames array
     cleanNamesSpelling(data, familyNames);
-    // sort familyNames array alphabetically [a-zA-Z]
-    sortAlpha(familyNames);
-    // create a unique array of family names from familyNames array
-    combineFamilyNames(familyNames, uniqueFamilyNames);
-    // count the number of times a family name occurs and set to FamilyNamesOccurance array
-    countFamilyNameOccurance(
-      uniqueFamilyNames,
-      familyNames,
-      familyNamesOccurance
-    );
-    // return the object containing the family name and count of name occurance
-    return {
-      familyName: uniqueFamilyNames,
-      count: familyNamesOccurance,
-    };
+    combineFamilyNames(familyNames, chartData);
+    countFamilyNameOccurance(familyNames, chartData);
+    return sortNumericHighLow(chartData);
   }
 };
 
@@ -292,8 +309,8 @@ window.addEventListener("load", async () => {
   const url = "https://thronesapi.com/api/v2/Characters";
   try {
     const data = await fetchData(url);
-    const nameAndCount = getChartData(data);
-    renderChart(nameAndCount);
+    const chartData = getChartData(data);
+    renderChart(chartData);
   } catch (error) {
     console.log(error.message);
   }
