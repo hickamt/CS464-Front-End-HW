@@ -25,36 +25,36 @@ const getRGBA = function getRandomGeneratedRgbaColor(
 ) {
   return `rgba(
     ${getRandomValue(min, getRandomValue(10, max))},
-    ${getRandomValue(min, getRandomValue(10, max))},
-    ${getRandomValue(min, getRandomValue(12, max))},
+    ${getRandomValue(min, getRandomValue(75, max))},
+    ${getRandomValue(min, getRandomValue(100, max))},
     ${alpha})`;
 };
 
 const backgroundColors = [
   "rgba(54, 162, 235, 0.8)",
-  getRGBA(),
+  getRGBA(0.5),
   "rgba(111, 207, 86, 0.8)",
-  getRGBA(),
+  getRGBA(0.5),
   "rgba(255, 99, 132, 0.8)",
-  getRGBA(),
+  getRGBA(0.5),
   "rgba(75, 192, 192, 0.8)",
-  getRGBA(),
+  getRGBA(0.5),
   "rgba(153, 102, 255, 0.8)",
-  getRGBA(),
+  getRGBA(0.5),
   "rgba(255, 159, 64, 0.8)",
-  getRGBA(),
+  getRGBA(0.5),
   "rgba(199, 199, 199, 0.8)",
-  getRGBA(),
+  getRGBA(0.5),
   "rgba(83, 102, 255, 0.8)",
-  getRGBA(),
+  getRGBA(0.5),
   "rgba(40, 159, 64, 0.8)",
-  getRGBA(),
+  getRGBA(0.5),
   "rgba(210, 199, 199, 0.8)",
-  getRGBA(),
+  getRGBA(0.5),
   "rgba(78, 52, 199, 0.8)",
-  getRGBA(),
+  getRGBA(0.5),
   "rgba(83, 13, 255, 0.8)",
-  getRGBA(),
+  getRGBA(0.5),
 ];
 
 const borderColors = [
@@ -133,14 +133,14 @@ const countFamilyNameOccurance = function setTheCountOfFamilyNameOccurances(
   // search familyNames array for matching names
   // if match, increment count
   // set count to chartData.count
-  chartData.map((name) => {
+  chartData.map((data) => {
     let count = 0;
     familyNames.map((familyName) => {
-      if (name.familyName === familyName) {
+      if (data.familyName === familyName) {
         ++count;
       }
     });
-    name.count = count;
+    data.count = count;
   });
 };
 
@@ -218,7 +218,7 @@ const sortNumericHighLow = function sortArrayByCountInFamilyNameHighToLow(
  * @returns the correct spelling of the family name or returns
  * the original name if no match for known misspellings are found
  */
-const cleanMisspelledNames = function cleanSimilarOrMisspelledNames(name) {
+const updateMisspelledNames = function changeSimilarOrMisspelledNames(name) {
   switch (name) {
     case "Lanister":
     case "Lannister":
@@ -253,13 +253,13 @@ const validateFamilyName = function validateFamilyName(name) {
  * @param familyNames is a temporary array to hold the family names
  * No return object, the 'familyNames' array is passed by reference
  */
-const cleanNamesSpelling = function cleanNamesForEmptyOrMispelled(
+const cleanData = function splitTrimAndCorrectMisspelledFamilyNames(
   data,
   familyNames
 ) {
   data.map((character) => {
     const familyName = validateFamilyName(
-      cleanMisspelledNames(character.family.split("House").join("").trim())
+      updateMisspelledNames(character.family.split("House").join("").trim())
     );
     familyNames.push(familyName);
   });
@@ -277,7 +277,7 @@ const getChartData = function setFamilyNameAndLengthOfName(data) {
   const chartData = [];
 
   if (data) {
-    cleanNamesSpelling(data, familyNames);
+    cleanData(data, familyNames);
     combineFamilyNames(familyNames, chartData);
     countFamilyNameOccurance(familyNames, chartData);
     return sortNumericHighLow(chartData);
@@ -309,8 +309,7 @@ window.addEventListener("load", async () => {
   const url = "https://thronesapi.com/api/v2/Characters";
   try {
     const data = await fetchData(url);
-    const chartData = getChartData(data);
-    renderChart(chartData);
+    renderChart(getChartData(data));
   } catch (error) {
     console.log(error.message);
   }

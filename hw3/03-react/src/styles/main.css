@@ -1,0 +1,68 @@
+/* Animation */
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Common Grid Item Styles */
+.header,
+.main-body {
+  border-radius: 0.5em;
+}
+
+.header {
+  /* background-color: var(--red_ochre); */
+  grid-area: header;
+}
+
+.main-body {
+  grid-area: main-body;
+  margin-top: 5rem;
+  background-color: var(--black_swan);
+}
+
+.dashboard-container {
+  margin: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "header header"
+    "main-body main-body";
+}
+
+/* Main Body Styles */
+
+.card {
+  width: 30rem;
+  background: var(--black_swan);
+  color: var(--whitetail);
+}
+
+.card-img {
+  padding: 0.5rem;
+  width: 155px;
+  height: 155px;
+
+}
+
+/* MEDIA QUERY */
+
+@media only screen and (max-width: 1900px) {
+}
+
+@media only screen and (max-width: 1500px) {
+}
+
+@media only screen and (max-width: 520px) {
+  .card {
+    width: 20rem;
+    background: var(--blue_washington);
+    color: var(--whitetail);
+  }
+}

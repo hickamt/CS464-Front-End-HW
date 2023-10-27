@@ -1,0 +1,24 @@
+.navbar.sticky-top {
+  background-color: var(--blue_washington);
+}
+
+.nav-link {
+  color: var(--whitetail);
+}
+
+.nav-link:hover {
+  color: var(--yellow_corn);
+}
+
+.nav-logo {
+  height: 4em;
+  width: 4em;
+  transition: 0.5s;
+}
+
+.nav-logo:hover {
+  background-color: var(--off_black);
+  border-radius: 1em;
+  padding: 0.5em;
+  transition: 0.5s;
+}

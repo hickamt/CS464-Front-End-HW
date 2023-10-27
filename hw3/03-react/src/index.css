@@ -1,0 +1,56 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* GAME OF THRONES COLOR SCHEMES*/
+:root {
+  --whitetail: #f4f0e4;
+  --zircon: #dddcda;
+  --sterling: #c7c7c7;
+  --yellow_corn: #ffdf8c;
+  --highlands: #f3e3c9;
+  --sunglow: #ffe5a0;
+  --la_fonda_spice: #de985d;
+  --red_ochre: #923734;
+  --read_red: #c72230;
+  --windsor_moss: #525949;
+  --blue_washington: #314659;
+  --cracked_pepper: #4f5052;
+  --charcoal_kendall: #666560;
+  --deep_aubergine: #5d464c;
+  --black_swan: #181a1f;
+  /* --black_swan: #3a373e; */
+  --off_black: #090909;
+}
+
+#root {
+  background-image: url("./assets/got_flags.jpg");
+  background-size: cover;
+  height: 85vh;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--blue_washington);
+  background-repeat: no-repeat;
+  color: var(--white);
+  font-family: "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+h1 {
+  font-family: "castellarregular";
+  font-size: 5rem;
+  text-align: center;
+  color: var(--sterling);
+  text-shadow: 2px 2px var(--deep_aubergine);
+  margin: 0.5rem;
+}
+
+@media only screen and (max-width: 520px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+}
