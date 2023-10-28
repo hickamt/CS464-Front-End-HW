@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import gotAPI from "../api/gotAPI";
+import { cleanData } from "../modules/validateAndClean";
 
 const Cards = function GOTCards() {
-  const [data, setData] = useState([])
+  const [data, setData] = useState([]);
   const [startIndex, setStartIndex] = useState(0);
   const maxDisplay = 3;
   let count = 0;
@@ -11,7 +12,7 @@ const Cards = function GOTCards() {
     console.log("inside useEffect()");
     const getData = async () => {
       const response = await gotAPI();
-      setData(response);
+      setData(cleanData(response));
     };
     getData();
   }, []);
@@ -43,12 +44,10 @@ const Cards = function GOTCards() {
                   <div className="col-md-8">
                     <div className="card-body">
                       <h2 className="card-title fs-4">{item.fullName}</h2>
-                      <p className="card-text">
-                        {item.title} {item.family}
-                      </p>
-                      {/* <a href="https://thronesapi.com/" className="btn btn-primary">
-                    Go somewhere
-                  </a> */}
+                      {item.family !== "Unknown" && (
+                        <p className="card-text">House of {item.family}</p>
+                      )}
+                      <p className="card-text">{item.title}</p>
                     </div>
                   </div>
                 </div>

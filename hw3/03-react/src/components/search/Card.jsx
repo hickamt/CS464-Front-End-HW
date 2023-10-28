@@ -15,10 +15,10 @@ function Card({ data }) {
         <div className="col">
           <div className="card-body">
             <h2 className="card-title fs-4">{data.fullName}</h2>
-            <p className="card-text">{data.title}</p>
             {data.family !== "Unknown" && (
               <p className="card-text">House of {data.family}</p>
             )}
+            <p className="card-text">{data.title}</p>
             <p></p>
           </div>
         </div>
