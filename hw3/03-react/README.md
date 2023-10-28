@@ -2,13 +2,32 @@
 
 Simple React Client application to display three views/pages relating the the Game Of Thrones Characters. Application uses the React Router to render only those page changes that are necessary rather than rendering a new page for each link followed.
 
+## Dependencies & Versions
+
+- [Package.json](./package.json)
+
+APP DEPENDENCIES:
+
+```bash
+"axios": "1.4.0",
+"bootstrap": "5.3.0",
+"chart.js": "4.4.0",
+"react": "18.2.0",
+"react-bootstrap": "2.8.0",
+"react-chartjs-2": "5.2.0",
+"react-dom": "18.2.0",
+"react-router-dom": "6.14.0"
+```
+
+NODE VERSIONS:
+
+```bash
+node v18.18.0
+npm v9.8.1
+nvm v0.39.1
+```
+
 ## Install & Run App
-
-This application was built with the following package manager versions:
-
-1. node v18.18.0
-2. npm v9.8.1
-3. nvm v0.39.1
 
 CLONE REPO:
 
@@ -29,15 +48,16 @@ npm i -y && npm run dev
 ```
 
 PORT:
+
 ```bash
 running on: http://localhost:5173
 ```
 
 ## Game Of Thrones API
 
-We are required to use `https://thronesapi.com/api/v2/Characters` an api that is known to have poorly written data such that names are misspelled or missing first, last, and family names.
+- [Game Of Thrones API](https://thronesapi.com/api/v2/Characters)
 
-This requires that the data is validated and cleaned before using it for user interaction and visualization.
+We are using an API known to have poorly written data such that names are misspelled or missing first, last, and family names. This requires that the data is validated and cleaned before using it for user interaction and visualization.
 
 ## /LandingPage
 
@@ -45,11 +65,15 @@ This requires that the data is validated and cleaned before using it for user in
 
 The primary landing page includes the title for Game Of Thrones (GOT) and a paginated card view of each GOT Character with full name and title if known.
 
+![Landing Page](./public/landing.png)
+
 ## /Search
 
 - [Search Component](./src/components/search/Search.jsx)
 
 In the second view for /Search, the user has the ability to search for a character by name using a partial match algorithm to set an array of possible matches for the user to select with an onClick event. The selection of a character from the list will show a card view similar to the home page but only showing the selected character from the search.
+
+![Search Page](./public/search.png)
 
 ## /Houses
 
