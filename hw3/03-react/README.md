@@ -62,6 +62,7 @@ We are using an API known to have poorly written data such that names are misspe
 ## /LandingPage
 
 - [Landing Page Component](./src/pages/LandingPage.jsx)
+- [Audio GOT Background Theme](./src/App.jsx)
 
 The primary landing page includes the title for Game Of Thrones (GOT) and a paginated card view of each GOT Character with full name and title if known.
 
@@ -80,3 +81,11 @@ In the second view for /Search, the user has the ability to search for a charact
 - [House Component](./src/components/houses/Houses.jsx)
 
 Finally, a view for Houses allows a user to view the number of characters in GOT that belong to the same family name. As an example, the Stark family name is associated with ten characters while Mormont has two. This data is visualized in a doughnut chart using react-chartjs-2.
+
+## Resources
+
+- [Game Of Thrones API](https://thronesapi.com/)
+- [Game Of Thrones Theme Music from Internet Archive](https://ia801007.us.archive.org/29/items/01MainTitle_201905/01%20Main%20Title.mp3)
+- [Game Of Thrones Background Image](https://wallpapersafari.com/game-of-thrones-house-wallpapers/)
+- [Stark Wolf Home Icon Image](https://wallpapercave.com/wp/ZHKjkPR.jpg)
+- [Targaryen Dragon Menu Icon Image](https://banner2.kisspng.com/20180403/jfq/kisspng-daenerys-targaryen-tyrion-lannister-house-targarye-throne-5ac308e0c79523.1654454215227312328175.jpg)
