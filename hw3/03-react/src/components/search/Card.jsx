@@ -10,18 +10,16 @@ function Card({ data }) {
     <div className="card mx-auto">
       <div className="row g-0">
         <div className="col">
-          <img
-            src={data.imageUrl}
-            alt={data.fullName}
-            className="card-img"
-          />
+          <img src={data.imageUrl} alt={data.fullName} className="card-img" />
         </div>
         <div className="col">
           <div className="card-body">
             <h2 className="card-title fs-4">{data.fullName}</h2>
-            <p className="card-text">
-              {data.title} {data.family}
-            </p>
+            <p className="card-text">{data.title}</p>
+            {data.family !== "Unknown" && (
+              <p className="card-text">House of {data.family}</p>
+            )}
+            <p></p>
           </div>
         </div>
       </div>
