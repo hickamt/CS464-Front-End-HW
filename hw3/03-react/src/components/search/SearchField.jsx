@@ -3,6 +3,7 @@ import gotAPI from "../../api/gotAPI";
 import Card from "./Card";
 import { cleanData, validateInput } from "../../modules/validateAndClean";
 import { matchInput } from "../../modules/filterArray";
+import DropDown from "./DropDown";
 
 function SearchField() {
   const [data, setData] = useState([]);
@@ -10,6 +11,7 @@ function SearchField() {
   const [displayInput, setDisplayInput] = useState([]);
   const [character, setCharacter] = useState(null);
 
+  // fetch character data
   useEffect(() => {
     const getData = async () => {
       const response = await gotAPI();
@@ -18,12 +20,14 @@ function SearchField() {
     getData();
   }, []);
 
+  // handle user selection from dropdown list
   const handleListSelection = (input) => {
     if (data && input < data.length) {
       setCharacter(data[input]);
     }
   };
 
+  // handle user input
   const handleInputChange = (input) => {
     setIsInputError(false);
     try {
@@ -49,29 +53,11 @@ function SearchField() {
             placeholder="Enter House Name"
             onChange={(e) => handleInputChange(e.target.value)}
           />
-          {displayInput && displayInput.length > 0 && (
-            <div id="list-container" className="dropdown-list">
-              <ul>
-                {displayInput.map((character, index) => {
-                  return (
-                    <>
-                      <a
-                        key={index}
-                        className="list-item"
-                        onClick={() => {
-                          handleListSelection(character.id);
-                          setDisplayInput([]);
-                        }}>
-                        <p className="name">
-                          {character.firstName} {character.lastName}
-                        </p>
-                      </a>
-                    </>
-                  );
-                })}
-              </ul>
-            </div>
-          )}
+          <DropDown
+            displayInput={displayInput}
+            handleListSelection={handleListSelection}
+            setDisplayInput={setDisplayInput}
+          />
           {character && <Card data={character} />}
         </div>
       </>

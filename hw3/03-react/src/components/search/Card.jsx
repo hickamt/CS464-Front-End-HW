@@ -1,10 +1,20 @@
 /* eslint-disable react/prop-types */
-function Card({data}) {
+
+/**
+ * Builds a card with character information
+ * @param data is a single character object
+ * @returns a card with character information
+ */
+function Card({ data }) {
   return (
     <div className="card single-card rounded">
       <div className="row g-0">
         <div className="col md-4">
-          <img src={data.imageUrl} alt={data.fullName} className="card-img rounded" />
+          <img
+            src={data.imageUrl}
+            alt={data.fullName}
+            className="card-img rounded"
+          />
         </div>
         <div className="col-md-8">
           <div className="card-body">
@@ -12,9 +22,6 @@ function Card({data}) {
             <p className="card-text">
               {data.title} {data.family}
             </p>
-            {/* <a href="https://thronesapi.com/" className="btn btn-primary">
-                    Go somewhere
-                  </a> */}
           </div>
         </div>
       </div>

@@ -22,3 +22,12 @@
   padding: 0.5em;
   transition: 0.5s;
 }
+
+.navbar-toggler-icon {
+  background-image: url("../assets/targaryenDragon.png");
+  height: 3.5rem;
+  width: 3.5rem;
+  border: 1.5px solid var(--whitetail);
+  border-radius: 3rem;
+}
+

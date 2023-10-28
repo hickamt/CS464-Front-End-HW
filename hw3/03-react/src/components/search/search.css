@@ -16,6 +16,10 @@
   margin: 3rem auto;
 }
 
+.list-item {
+  text-decoration: none;
+}
+
 /* SearchField.jsx */
 
 .input-error {
@@ -23,14 +27,19 @@
 }
 
 .dropdown-list {
+  text-align: left;
+  background: var(--red_ochre);
   margin: 0 auto;
   max-height: 7rem;
   width: 15rem;
   overflow: auto;
-  background: var(--black_swan);
   display: block;
 }
 
 .name {
   color: var(--whitetail);
+}
+
+.name:hover {
+  color: var(--yellow_corn);
 }
