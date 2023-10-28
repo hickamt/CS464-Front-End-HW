@@ -31,13 +31,13 @@ const Cards = function GOTCards() {
           if (index >= startIndex && count < maxDisplay) {
             ++count;
             return (
-              <div className="card m-3 rounded" key={index}>
+              <div className="card" key={index}>
                 <div className="row g-0">
-                  <div className="col md-4">
+                  <div className="col">
                     <img
                       src={item.imageUrl}
                       alt={item.fullName}
-                      className="card-img rounded"
+                      className="card-img"
                     />
                   </div>
                   <div className="col-md-8">

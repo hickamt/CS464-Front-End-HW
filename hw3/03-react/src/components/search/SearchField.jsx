@@ -58,8 +58,8 @@ function SearchField() {
             handleListSelection={handleListSelection}
             setDisplayInput={setDisplayInput}
           />
-          {character && <Card data={character} />}
         </div>
+          {character && <Card data={character} />}
       </>
     )
   );

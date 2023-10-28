@@ -1,7 +1,7 @@
 import Header from "../components/Header";
 import MainBody from "../components/MainBody";
 
-function Main() {
+function LandingPage() {
   return (
     <>
       <div className="dashboard-container text-center mt-3">
@@ -12,4 +12,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default LandingPage;

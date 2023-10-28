@@ -7,16 +7,16 @@
  */
 function Card({ data }) {
   return (
-    <div className="card single-card rounded">
+    <div className="card mx-auto">
       <div className="row g-0">
-        <div className="col md-4">
+        <div className="col">
           <img
             src={data.imageUrl}
             alt={data.fullName}
-            className="card-img rounded"
+            className="card-img"
           />
         </div>
-        <div className="col-md-8">
+        <div className="col">
           <div className="card-body">
             <h2 className="card-title fs-4">{data.fullName}</h2>
             <p className="card-text">
