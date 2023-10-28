@@ -1,7 +1,5 @@
 .search-container {
   margin: 0 auto;
-  /* max-width: 40rem; */
-
 }
 
 .search-title {
@@ -14,7 +12,7 @@
   height: 2rem;
 }
 
-.card {
+.single-card {
   margin: 3rem auto;
 }
 
@@ -28,8 +26,9 @@
   margin: 0 auto;
   max-height: 7rem;
   width: 15rem;
-  overflow: auto; 
+  overflow: auto;
   background: var(--black_swan);
+  display: block;
 }
 
 .name {

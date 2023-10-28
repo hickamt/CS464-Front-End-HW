@@ -6,16 +6,9 @@ import { matchInput } from "../../modules/filterArray";
 
 function SearchField() {
   const [data, setData] = useState([]);
-  const [isInputError, setIsInputError] = useState(true);
+  const [isInputError, setIsInputError] = useState(false);
   const [displayInput, setDisplayInput] = useState([]);
-  const character = {
-    firstName: "U",
-    lastName: "U",
-    fullName: "U",
-    title: "U",
-    family: "U",
-    imageUrl: "U",
-  };
+  const [character, setCharacter] = useState(null);
 
   useEffect(() => {
     const getData = async () => {
@@ -24,6 +17,12 @@ function SearchField() {
     };
     getData();
   }, []);
+
+  const handleListSelection = (input) => {
+    if (data && input < data.length) {
+      setCharacter(data[input]);
+    }
+  };
 
   const handleInputChange = (input) => {
     setIsInputError(false);
@@ -40,6 +39,9 @@ function SearchField() {
   return (
     data && (
       <>
+        {isInputError && (
+          <p className="input-error">Please Enter a Valid Character Name</p>
+        )}
         <div className="search-container d-flex flex-column justify-content-center">
           <input
             type="text"
@@ -47,27 +49,30 @@ function SearchField() {
             placeholder="Enter House Name"
             onChange={(e) => handleInputChange(e.target.value)}
           />
-          {displayInput && (
-            <div className="dropdown-list">
+          {displayInput && displayInput.length > 0 && (
+            <div id="list-container" className="dropdown-list">
               <ul>
-              {displayInput.map((character) => {
-                return (
-                  <>
-                    <p className="name">
-                      {character.firstName} {character.lastName}
-                    </p>
-                  </>
-                );
-              })}
-
-
+                {displayInput.map((character, index) => {
+                  return (
+                    <>
+                      <a
+                        key={index}
+                        className="list-item"
+                        onClick={() => {
+                          handleListSelection(character.id);
+                          setDisplayInput([]);
+                        }}>
+                        <p className="name">
+                          {character.firstName} {character.lastName}
+                        </p>
+                      </a>
+                    </>
+                  );
+                })}
               </ul>
             </div>
           )}
-          {isInputError && (
-            <p className="input-error">Please Enter a Valid Character Name</p>
-          )}
-          {!isInputError && <Card data={character} />}
+          {character && <Card data={character} />}
         </div>
       </>
     )

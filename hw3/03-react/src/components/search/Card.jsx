@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 function Card({data}) {
   return (
-    <div className="card rounded">
+    <div className="card single-card rounded">
       <div className="row g-0">
         <div className="col md-4">
           <img src={data.imageUrl} alt={data.fullName} className="card-img rounded" />
