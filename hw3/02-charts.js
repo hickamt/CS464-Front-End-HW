@@ -1,4 +1,12 @@
 /**
+ * Created by: Todd Hickam | CS 464P/564P | Fall 2023
+ * The following function will fetch Game of Thrones Characters from an API
+ * and display the data in a doughnut chart representing the number of
+ * characters in each family.
+ * Styles: /hw3/02-charts.css
+ */
+
+/**
  * Generate a pseudo random value within a range [min, max]
  * @param min value for lower range (inclusive)
  * @param max value for upper range (inclusive)
