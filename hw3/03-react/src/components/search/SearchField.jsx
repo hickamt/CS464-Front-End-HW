@@ -2,19 +2,7 @@ import { useEffect, useState } from "react";
 import gotAPI from "../../api/gotAPI";
 import Card from "./Card";
 import { cleanData, validateInput } from "../../modules/validateAndClean";
-
-const matchInput = function matchInputToFirstOrLastName(data, input) {
-  if (input === "") return null;
-  let matchedCharacters = data.filter((character) => {
-    if (
-      character.firstName.toLowerCase().includes(input.toLowerCase()) ||
-      character.lastName.toLowerCase().includes(input.toLowerCase())
-    ) {
-      return character;
-    }
-  });
-  return matchedCharacters;
-};
+import { matchInput } from "../../modules/filterArray";
 
 function SearchField() {
   const [data, setData] = useState([]);
@@ -42,7 +30,7 @@ function SearchField() {
     try {
       validateInput(input);
       const matchedCharacters = matchInput(data, input);
-      setDisplayInput(matchedCharacters)
+      setDisplayInput(matchedCharacters);
     } catch (error) {
       setIsInputError(true);
       console.error(error.message);
@@ -59,14 +47,23 @@ function SearchField() {
             placeholder="Enter House Name"
             onChange={(e) => handleInputChange(e.target.value)}
           />
-          {displayInput &&
-            displayInput.map((character) => {
-              return (
-                <>
-                  <p className="name">{character.firstName} {character.lastName}</p>
-                </>
-              );
-            })}
+          {displayInput && (
+            <div className="dropdown-list">
+              <ul>
+              {displayInput.map((character) => {
+                return (
+                  <>
+                    <p className="name">
+                      {character.firstName} {character.lastName}
+                    </p>
+                  </>
+                );
+              })}
+
+
+              </ul>
+            </div>
+          )}
           {isInputError && (
             <p className="input-error">Please Enter a Valid Character Name</p>
           )}
