@@ -6,8 +6,11 @@
  * Styles: /hw3/02-charts.css
  */
 
-import { Chart } from "chart.js";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+ChartJS.register(ArcElement, Tooltip, Legend);
+import { Doughnut } from "react-chartjs-2";
 import { getRGBA } from "../../modules/randomColors";
+import { useState, useEffect } from "react";
 
 const backgroundColors = [
   "rgba(54, 162, 235, 0.8)",
@@ -66,39 +69,60 @@ const borderColors = [
 /**
  * Renders a doughnut chart for each character house name
  * categorized by the number of house name occurances
- * @param chartData contains the family name and count of each family name occurance
+ * @param chartConfig contains the family name and count of each family name occurance
  */
-const renderChart = (chartData) => {
-  // const donutChart = document.querySelector(".donut-chart");
-  const donutChart = new Chart(donutChart, {
-    type: "doughnut",
-    data: {
-      labels: chartData.map((name) => name.familyName),
-      datasets: [
-        {
-          label: "Family Name & Length",
-          data: chartData.map((name) => name.count),
-          backgroundColor: backgroundColors,
-          borderColor: borderColors,
-          borderWidth: 1,
-        },
-      ],
-    },
-    options: {
-      legend: {
-        position: "bottom",
-      },
-      title: {
-        display: true,
-        text: "Game of Thrones | Number of Characters in Each Family",
-        fontSize: 24,
-        fontWeight: "bold",
-      },
-    },
-  });
-  return donutChart;
-};
+// const chartConfig = (characterData) => {
+//   return {
+//     type: "doughnut",
+//     data: {
+//       labels: characterData.map((name) => name.familyName),
+//       datasets: [
+//         {
+//           label: "Family Name & Length",
+//           data: characterData.map((name) => name.count),
+//           backgroundColor: backgroundColors,
+//           borderColor: borderColors,
+//           borderWidth: 1,
+//         },
+//       ],
+//     },
+//     options: {
+//       legend: {
+//         position: "bottom",
+//       },
+//       title: {
+//         display: true,
+//         text: "Game of Thrones | Number of Characters in Each Family",
+//         fontSize: 24,
+//         fontWeight: "bold",
+//       },
+//     },
+//   };
+// };
 
+const chartConfig = (characterData) => {
+  return {
+    labels: characterData.map((name) => name.familyName),
+    datasets: [
+      {
+        label: "Family Name & Length",
+        data: characterData.map((name) => name.count),
+        backgroundColor: backgroundColors,
+        borderColor: borderColors,
+        borderWidth: 1,
+      },
+    ],
+  };
+  // options: {
+  //   legend: {
+  //     position: "bottom",
+  //   },
+  //   title: {
+  //     display: true,
+  //     text: "Game of Thrones | Number of Characters in Each Family",
+  //     fontSize: 24,
+  //     fontWeight: "bold",
+};
 /**
  * Function will count the number of times a family name occurs
  * @param uniqueFamilyNames is an array of unique family names
@@ -165,15 +189,28 @@ const sortNumericHighLow = function sortArrayByCountInFamilyNameHighToLow(
  * @returns an HTML element containing a DonutChart
  * representing the number of characters in each family
  */
-function DonutChart(data) {
-  const familyNames = data.map((character) => character.family);
-  const chartData = [];
+function Chart({ characterData }) {
+  const [chartData, setChartData] = useState([]);
 
-  if (data) {
-    combineFamilyNames(familyNames, chartData);
-    countFamilyNameOccurance(familyNames, chartData);
-    return renderChart(sortNumericHighLow(chartData));
-  }
+  const createDonutChart =
+    function createAChartForTheNumberOfCharactersInEachFamily() {
+      let familyNames = [];
+      let data = [];
+      characterData.map((character) => familyNames.push(character.family));
+      combineFamilyNames(familyNames, data);
+      countFamilyNameOccurance(familyNames, data);
+      setChartData(sortNumericHighLow(data));
+    };
+
+  useEffect(() => {
+    createDonutChart();
+  }, []);
+
+  return (
+    <div className="chart-container">
+      <Doughnut data={chartConfig(chartData)} />
+    </div>
+  );
 }
 
-export default DonutChart;
+export default Chart;

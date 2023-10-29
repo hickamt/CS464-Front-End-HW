@@ -18,6 +18,7 @@ function ComponentThree() {
     const getData = async () => {
       const response = await gotAPI();
       setData(cleanData(response));
+      console.log("Response: ", response)
       setIsData(true)
     };
     getData();
@@ -27,8 +28,7 @@ function ComponentThree() {
     <>
       <div className="component-three text-center mt-3">
         <Header title={"GOT | Houses"} />
-        {!isData && <SpinAnimation />}
-        {isData && <DonutChart data={data} />}
+        {isData && data.length > 0 && <SpinAnimation /> ? <DonutChart characterData={data} /> : <SpinAnimation />}
       </div>
     </>
   );
