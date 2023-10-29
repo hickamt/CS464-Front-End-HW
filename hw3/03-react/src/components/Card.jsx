@@ -5,14 +5,17 @@
  * @param data is a single character object
  * @returns a card with character information
  */
-function Card({ data, bgColor }) {
-  bgColor = bgColor || "rgba(49, 70, 89, 0.9)";
+function Card({ data, bgColor, index }) {
+  const backgroundColor = bgColor || "rgba(49, 70, 89, 0.9)";
 
   return (
-    <div className="card mx-auto" style={{ backgroundColor: bgColor }}>
+    <div key={index} className="card mx-auto" style={{ backgroundColor: backgroundColor }}>
       <div className="row g-0">
         <div className="col">
-          <img src={data.imageUrl} alt={data.fullName} className="card-img" />
+          <img 
+          src={data.imageUrl} 
+          alt={data.fullName} 
+          className="card-img" />
         </div>
         <div className="col">
           <div className="card-body">

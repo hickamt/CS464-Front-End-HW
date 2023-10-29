@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import gotAPI from "../../api/gotAPI";
-import Card from "./Card";
+import Card from "../Card";
 import { cleanData, validateInput } from "../../modules/validateAndClean";
 import { matchInput } from "../../modules/filterArray";
 import DropDown from "./DropDown";
