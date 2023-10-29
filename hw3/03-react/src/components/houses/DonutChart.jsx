@@ -12,7 +12,7 @@ import { Doughnut } from "react-chartjs-2";
 import { getRGBA } from "../../modules/randomColors";
 import { useState, useRef, useEffect } from "react";
 import { getElementAtEvent } from "react-chartjs-2";
-import Card from "../search/Card";
+import Card from "../Card";
 
 const backgroundColors = [
   "rgba(49, 70, 89, 0.9)",
@@ -80,7 +80,7 @@ const chartConfig = (characterData) => {
     labels: [],
     datasets: [
       {
-        label: "Select Area",
+        label: "Count",
         data: characterData.map((name) => name.count),
         backgroundColor: backgroundColors,
         borderColor: borderColors,
