@@ -6,3 +6,9 @@ canvas {
   max-height: 90%;
   max-width: auto;
 }
+
+.card-container {
+  overflow-x: hidden;
+  overflow-y: auto;
+  text-align: justify;
+}

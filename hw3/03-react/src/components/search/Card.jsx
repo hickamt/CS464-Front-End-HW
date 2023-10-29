@@ -6,9 +6,10 @@
  * @returns a card with character information
  */
 function Card({ data, bgColor }) {
+  bgColor = bgColor || "rgba(49, 70, 89, 0.9)";
 
   return (
-    <div className="card mx-auto" style={{backgroundColor: bgColor}}>
+    <div className="card mx-auto" style={{ backgroundColor: bgColor }}>
       <div className="row g-0">
         <div className="col">
           <img src={data.imageUrl} alt={data.fullName} className="card-img" />
