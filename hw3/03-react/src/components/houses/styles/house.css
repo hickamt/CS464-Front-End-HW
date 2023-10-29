@@ -1,0 +1,15 @@
+canvas {
+  margin: 1em auto;
+}
+
+.chart-container {
+  max-height: 60%;
+}
+
+.card.mx-auto {
+  background-color: rgba(24, 26, 31, 0.9);
+}
+
+.card-container {
+  margin: 0 auto;
+}

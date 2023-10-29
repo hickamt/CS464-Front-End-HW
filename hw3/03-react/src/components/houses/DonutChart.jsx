@@ -10,33 +10,36 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 ChartJS.register(ArcElement, Tooltip, Legend);
 import { Doughnut } from "react-chartjs-2";
 import { getRGBA } from "../../modules/randomColors";
-import { useState, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
+import { getElementAtEvent } from "react-chartjs-2";
+import Card from "../search/Card";
 
 const backgroundColors = [
-  "rgba(54, 162, 235, 0.8)",
-  getRGBA(0.5),
-  "rgba(111, 207, 86, 0.8)",
-  getRGBA(0.5),
-  "rgba(255, 99, 132, 0.8)",
-  getRGBA(0.5),
-  "rgba(75, 192, 192, 0.8)",
-  getRGBA(0.5),
-  "rgba(153, 102, 255, 0.8)",
-  getRGBA(0.5),
-  "rgba(255, 159, 64, 0.8)",
-  getRGBA(0.5),
-  "rgba(199, 199, 199, 0.8)",
-  getRGBA(0.5),
-  "rgba(83, 102, 255, 0.8)",
-  getRGBA(0.5),
-  "rgba(40, 159, 64, 0.8)",
-  getRGBA(0.5),
-  "rgba(210, 199, 199, 0.8)",
-  getRGBA(0.5),
-  "rgba(78, 52, 199, 0.8)",
-  getRGBA(0.5),
-  "rgba(83, 13, 255, 0.8)",
-  getRGBA(0.5),
+  "rgba(49, 70, 89, 0.9)",
+  getRGBA(0.8),
+  "#181a1f",
+  getRGBA(0.8),
+  "#923734",
+  getRGBA(0.8),
+  "#ffdf8c",
+  getRGBA(0.8),
+  "#525949",
+  getRGBA(0.8),
+  "#c72230",
+  getRGBA(0.8),
+  "#4f5052",
+  getRGBA(0.8),
+  "#314659",
+  getRGBA(0.8),
+  "#ffe5a0",
+  getRGBA(0.8),
+  "#c7c7c7",
+  getRGBA(0.8),
+  "#181a1f",
+  getRGBA(0.8),
+  "#de985d",
+  getRGBA(0.8),
+  "#314659",
 ];
 
 const borderColors = [
@@ -71,41 +74,13 @@ const borderColors = [
  * categorized by the number of house name occurances
  * @param chartConfig contains the family name and count of each family name occurance
  */
-// const chartConfig = (characterData) => {
-//   return {
-//     type: "doughnut",
-//     data: {
-//       labels: characterData.map((name) => name.familyName),
-//       datasets: [
-//         {
-//           label: "Family Name & Length",
-//           data: characterData.map((name) => name.count),
-//           backgroundColor: backgroundColors,
-//           borderColor: borderColors,
-//           borderWidth: 1,
-//         },
-//       ],
-//     },
-//     options: {
-//       legend: {
-//         position: "bottom",
-//       },
-//       title: {
-//         display: true,
-//         text: "Game of Thrones | Number of Characters in Each Family",
-//         fontSize: 24,
-//         fontWeight: "bold",
-//       },
-//     },
-//   };
-// };
-
 const chartConfig = (characterData) => {
   return {
-    labels: characterData.map((name) => name.familyName),
+    // labels: characterData.map((name) => name.familyName),
+    labels: [],
     datasets: [
       {
-        label: "Family Name & Length",
+        label: "Select Area",
         data: characterData.map((name) => name.count),
         backgroundColor: backgroundColors,
         borderColor: borderColors,
@@ -113,16 +88,8 @@ const chartConfig = (characterData) => {
       },
     ],
   };
-  // options: {
-  //   legend: {
-  //     position: "bottom",
-  //   },
-  //   title: {
-  //     display: true,
-  //     text: "Game of Thrones | Number of Characters in Each Family",
-  //     fontSize: 24,
-  //     fontWeight: "bold",
 };
+
 /**
  * Function will count the number of times a family name occurs
  * @param uniqueFamilyNames is an array of unique family names
@@ -189,8 +156,30 @@ const sortNumericHighLow = function sortArrayByCountInFamilyNameHighToLow(
  * @returns an HTML element containing a DonutChart
  * representing the number of characters in each family
  */
+// eslint-disable-next-line react/prop-types
 function Chart({ characterData }) {
   const [chartData, setChartData] = useState([]);
+  const [cardData, setCardData] = useState([]);
+  const chartRef = useRef(null);
+
+  const onClick = (event) => {
+    let temp = [];
+    const chart = getElementAtEvent(chartRef.current, event);
+    // const cards = document.getElementsByClassName("card");
+    const chartIndex = chart[0].index;
+    // set the background color of each card to the color of the chart
+    // cards.map((card) => {
+    //   card.style.backgroundColor = backgroundColors[chartIndex];
+    // });
+    // create a object array of characters matching the chart family name
+    // for the onclick event
+    characterData.map((data) => {
+      if (data.family === chartData[chartIndex].familyName) {
+        temp.push(data);
+      }
+    });
+    setCardData(temp);
+  };
 
   const createDonutChart =
     function createAChartForTheNumberOfCharactersInEachFamily() {
@@ -199,7 +188,8 @@ function Chart({ characterData }) {
       characterData.map((character) => familyNames.push(character.family));
       combineFamilyNames(familyNames, data);
       countFamilyNameOccurance(familyNames, data);
-      setChartData(sortNumericHighLow(data));
+      const sortedData = sortNumericHighLow(data);
+      setChartData(sortedData);
     };
 
   useEffect(() => {
@@ -207,9 +197,22 @@ function Chart({ characterData }) {
   }, []);
 
   return (
-    <div className="chart-container">
-      <Doughnut data={chartConfig(chartData)} />
-    </div>
+    <>
+      <div className="chart-container">
+        <Doughnut
+          ref={chartRef}
+          data={chartConfig(chartData)}
+          onClick={onClick}
+        />
+      </div>
+      {cardData && cardData.length > 0 && (
+        <div className="card-container">
+          {cardData.map((data, index) => {
+            return <Card key={index} data={data} />;
+          })}
+        </div>
+      )}
+    </>
   );
 }
 
