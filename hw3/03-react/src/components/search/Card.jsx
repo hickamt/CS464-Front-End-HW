@@ -1,13 +1,20 @@
 /* eslint-disable react/prop-types */
 
+const cardStyles = {
+  backgroundColor: null,
+}
+
 /**
  * Builds a card with character information
  * @param data is a single character object
  * @returns a card with character information
  */
-function Card({ data }) {
+function Card({ data, bgColor }) {
+  // const bgColor = bgColor || "rgba(24,26,31, 0.9)";
+  console.log("Color: ", bgColor);
+
   return (
-    <div className="card mx-auto">
+    <div className="card mx-auto" style={{backgroundColor: bgColor}}>
       <div className="row g-0">
         <div className="col">
           <img src={data.imageUrl} alt={data.fullName} className="card-img" />

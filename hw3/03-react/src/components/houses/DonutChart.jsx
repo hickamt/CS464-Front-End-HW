@@ -161,18 +161,14 @@ function Chart({ characterData }) {
   const [chartData, setChartData] = useState([]);
   const [cardData, setCardData] = useState([]);
   const chartRef = useRef(null);
+  const [bgColor, setBgColor] = useState("rgba(24,26,31, 0.9)");
 
   const onClick = (event) => {
     let temp = [];
     const chart = getElementAtEvent(chartRef.current, event);
-    // const cards = document.getElementsByClassName("card");
+    console.log(chart[0].element.options.backgroundColor);
     const chartIndex = chart[0].index;
-    // set the background color of each card to the color of the chart
-    // cards.map((card) => {
-    //   card.style.backgroundColor = backgroundColors[chartIndex];
-    // });
-    // create a object array of characters matching the chart family name
-    // for the onclick event
+    setBgColor(chart[0].element.options.backgroundColor);
     characterData.map((data) => {
       if (data.family === chartData[chartIndex].familyName) {
         temp.push(data);
@@ -208,7 +204,7 @@ function Chart({ characterData }) {
       {cardData && cardData.length > 0 && (
         <div className="card-container">
           {cardData.map((data, index) => {
-            return <Card key={index} data={data} />;
+            return <Card key={index} data={data} bgColor={bgColor} />;
           })}
         </div>
       )}

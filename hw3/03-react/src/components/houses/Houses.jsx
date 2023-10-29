@@ -23,8 +23,8 @@ function ComponentThree() {
   }, []);
 
   return (
-    <>
-      <div className="component-three mt-3">
+    <div className="house-container">
+      <div className="header-container mt-3">
         <Header title={"GOT | Houses"} />
       </div>
       {isData && data.length > 0 && <SpinAnimation /> ? (
@@ -32,7 +32,7 @@ function ComponentThree() {
       ) : (
         <SpinAnimation />
       )}
-    </>
+    </div>
   );
 }
 
