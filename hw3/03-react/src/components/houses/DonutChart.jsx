@@ -16,29 +16,29 @@ import Card from "../Card";
 
 const backgroundColors = [
   "rgba(49, 70, 89, 0.9)",
-  getRGBA(0.8),
+  getRGBA(5, 255, 0.85),
   "#181a1f",
-  getRGBA(0.9),
+  getRGBA(5, 255, 0.85),
   "#923734",
-  getRGBA(0.9),
+  getRGBA(5, 255, 0.85),
   "#ffdf8c",
-  getRGBA(0.8),
+  getRGBA(5, 255, 0.85),
   "#525949",
-  getRGBA(0.8),
+  getRGBA(5, 255, 0.85),
   "#c72230",
-  getRGBA(0.8),
+  getRGBA(5, 255, 0.85),
   "#4f5052",
-  getRGBA(0.8),
+  getRGBA(5, 255, 0.85),
   "#314659",
-  getRGBA(0.8),
+  getRGBA(5, 255, 0.85),
   "#ffe5a0",
-  getRGBA(0.8),
+  getRGBA(5, 255, 0.85),
   "#c7c7c7",
-  getRGBA(0.8),
+  getRGBA(5, 255, 0.85),
   "#181a1f",
-  getRGBA(0.8),
+  getRGBA(5, 255, 0.85),
   "#de985d",
-  getRGBA(0.8),
+  getRGBA(5, 255, 0.85),
   "#314659",
 ];
 
@@ -194,7 +194,8 @@ function Chart({ characterData }) {
         />
       </div>
       {cardData && cardData.length > 0 && (
-        <div className="card-container">
+        // <div className="card-container">
+        <div className="card-container d-flex flex-wrap justify-content-around">
           {cardData.map((data, index) => {
             return <Card key={index} bgColor={bgColor} data={data} />;
           })}

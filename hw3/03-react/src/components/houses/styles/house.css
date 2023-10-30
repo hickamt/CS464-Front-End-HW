@@ -8,7 +8,7 @@ canvas {
 }
 
 .card-container {
-  overflow-x: hidden;
+  /* overflow-x: hidden;
   overflow-y: auto;
-  text-align: justify;
+  text-align: justify; */
 }

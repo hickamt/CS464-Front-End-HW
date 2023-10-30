@@ -59,7 +59,7 @@ function SearchField() {
             setDisplayInput={setDisplayInput}
           />
         </div>
-          {character && <Card data={character} />}
+          {character && <Card index={0} data={character} bgColor={"#314659"}  />}
       </>
     )
   );
