@@ -1,4 +1,4 @@
-import {backgroundColors, borderColors} from "../../../modules/randomColors"
+import { backgroundColors, borderColors } from "../../../modules/randomColors";
 /**
  * Renders a doughnut chart for each character house name
  * categorized by the number of house name occurances
@@ -6,8 +6,8 @@ import {backgroundColors, borderColors} from "../../../modules/randomColors"
  */
 export const chartConfig = (characterData) => {
   return {
-    // labels: characterData.map((name) => name.familyName),
-    labels: [],
+    type: "doughnut",
+    labels: characterData.map((name) => name.familyName),
     datasets: [
       {
         label: "Count",
@@ -26,24 +26,22 @@ export const chartConfig = (characterData) => {
  * @param familyNamesOccurance is an array to set the count of each family name occurance
  * Sets the count of each family name occurance to the familyNamesOccurance array
  */
-export const countFamilyNameOccurance = function setTheCountOfFamilyNameOccurances(
-  familyNames,
-  chartData
-) {
-  // for each name in chartData,
-  // search familyNames array for matching names
-  // if match, increment count
-  // set count to chartData.count
-  chartData.map((data) => {
-    let count = 0;
-    familyNames.map((familyName) => {
-      if (data.familyName === familyName) {
-        ++count;
-      }
+export const countFamilyNameOccurance =
+  function setTheCountOfFamilyNameOccurances(familyNames, chartData) {
+    // for each name in chartData,
+    // search familyNames array for matching names
+    // if match, increment count
+    // set count to chartData.count
+    chartData.map((data) => {
+      let count = 0;
+      familyNames.map((familyName) => {
+        if (data.familyName === familyName) {
+          ++count;
+        }
+      });
+      data.count = count;
     });
-    data.count = count;
-  });
-};
+  };
 
 /**
  * function will combine unique family names into a single array of objects
