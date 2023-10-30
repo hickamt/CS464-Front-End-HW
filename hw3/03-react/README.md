@@ -83,6 +83,10 @@ In the second view for /Search, the user has the ability to search for a charact
 
 Finally, a view for Houses allows a user to view the number of characters in GOT that belong to the same family name. As an example, the Stark family name is associated with ten characters while Mormont has two. This data is visualized in a doughnut chart using react-chartjs-2.
 
+![Houses Page](./public/houses.png)
+
+![Houses Card View](./public/houses_two.png)
+
 ## Resources
 
 - [Game Of Thrones API](https://thronesapi.com/)
