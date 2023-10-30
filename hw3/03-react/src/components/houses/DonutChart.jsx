@@ -164,31 +164,23 @@ function Chart({ characterData }) {
   const [bgColor, setBgColor] = useState("rgba(24,26,31, 0.9)");
 
   const onClick = (event) => {
-    let temp = [];
     const chart = getElementAtEvent(chartRef.current, event);
-    console.log(chart[0].element.options.backgroundColor);
-    const chartIndex = chart[0].index;
     setBgColor(chart[0].element.options.backgroundColor);
-    characterData.map((data) => {
-      if (data.family === chartData[chartIndex].familyName) {
-        temp.push(data);
-      }
-    });
-    setCardData(temp);
+    setCardData(
+      characterData.filter(
+        (data) => data.family === chartData[chart[0].index].familyName
+      ) || []
+    );
   };
 
-  const createDonutChart =
-    function createAChartForTheNumberOfCharactersInEachFamily() {
-      let familyNames = [];
+  useEffect(() => {
+    const createDonutChart = () => {
       let data = [];
-      characterData.map((character) => familyNames.push(character.family));
+      let familyNames = characterData.map((character) => character.family);
       combineFamilyNames(familyNames, data);
       countFamilyNameOccurance(familyNames, data);
-      const sortedData = sortNumericHighLow(data);
-      setChartData(sortedData);
+      setChartData(sortNumericHighLow(data));
     };
-
-  useEffect(() => {
     createDonutChart();
   }, []);
 
@@ -204,7 +196,7 @@ function Chart({ characterData }) {
       {cardData && cardData.length > 0 && (
         <div className="card-container">
           {cardData.map((data, index) => {
-            return <Card key={index} data={data} bgColor={bgColor} />;
+            return <Card key={index} bgColor={bgColor} data={data} />;
           })}
         </div>
       )}

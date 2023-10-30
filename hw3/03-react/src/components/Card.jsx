@@ -5,7 +5,7 @@
  * @param data is a single character object
  * @returns a card with character information
  */
-function Card({ data, bgColor, index }) {
+function Card({ index, bgColor, data }) {
   const backgroundColor = bgColor || "rgba(49, 70, 89, 0.9)";
 
   return (

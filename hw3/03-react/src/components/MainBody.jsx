@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import gotAPI from "../api/gotAPI";
 import { cleanData } from "../modules/validateAndClean";
+import Card from "./Card";
 
 const MainBody = function GOTCards() {
   const [data, setData] = useState([]);
@@ -32,28 +33,7 @@ const MainBody = function GOTCards() {
           {data.map((item, index) => {
             if (index >= startIndex && count < maxDisplay) {
               ++count;
-              return (
-                <div className="card mx-auto" key={index}>
-                  <div className="row g-0">
-                    <div className="col">
-                      <img
-                        src={item.imageUrl}
-                        alt={item.fullName}
-                        className="card-img"
-                      />
-                    </div>
-                    <div className="col">
-                      <div className="card-body">
-                        <h2 className="card-title fs-4">{item.fullName}</h2>
-                        {item.family !== "Unknown" && (
-                          <p className="card-text">House of {item.family}</p>
-                        )}
-                        <p className="card-text">{item.title}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              );
+              return <Card key={index} bgColor={"#314659"} data={item} />;
             }
           })}
         </div>
