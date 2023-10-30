@@ -11,13 +11,13 @@
 }
 
 .rhap_container {
-  margin: 0 auto;
+  /* margin: 0 auto; */
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   line-height: 1;
   font-family: var(--rhap_font-family);
-  width: 50%;
+  width: 20%;
   padding: 10px 15px;
   background-color: var(--rhap_background-color);
   box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.2);
@@ -29,6 +29,12 @@
 
   svg {
     vertical-align: initial;
+  }
+}
+
+@media only screen and (max-width: 1020px) {
+  .rhap_container {
+    width: 65%;
   }
 }
 

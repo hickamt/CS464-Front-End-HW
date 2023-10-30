@@ -47,7 +47,9 @@ function SearchField() {
           <p className="input-error">Please Enter a Valid Character Name</p>
         )}
         <div className="search-container d-flex flex-column justify-content-center">
+          <label htmlFor="search-character" className="search-label">Search input for GOT Characters</label>
           <input
+          id="search-character"
             type="text"
             className="search-input"
             placeholder="Enter House Name"

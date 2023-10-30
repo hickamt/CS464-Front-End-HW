@@ -14,7 +14,7 @@ function Card({ index, bgColor, data }) {
         <div className="col">
           <img 
           src={data.imageUrl} 
-          alt={data.fullName} 
+          alt={`Game Of Thrones: ${data.fullName}`} 
           className="card-img" />
         </div>
         <div className="col">

@@ -9,6 +9,10 @@
   color: var(--whitetail);
 }
 
+.search-label {
+  display: none;
+}
+
 .search-input {
   margin: 1rem auto 1em auto;
   width: 15rem;
