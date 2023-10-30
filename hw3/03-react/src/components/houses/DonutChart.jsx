@@ -9,146 +9,15 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 ChartJS.register(ArcElement, Tooltip, Legend);
 import { Doughnut } from "react-chartjs-2";
-import { getRGBA } from "../../modules/randomColors";
 import { useState, useRef, useEffect } from "react";
 import { getElementAtEvent } from "react-chartjs-2";
 import Card from "../Card";
-
-const backgroundColors = [
-  "rgba(49, 70, 89, 0.9)",
-  getRGBA(5, 255, 0.85),
-  "#181a1f",
-  getRGBA(5, 255, 0.85),
-  "#923734",
-  getRGBA(5, 255, 0.85),
-  "#ffdf8c",
-  getRGBA(5, 255, 0.85),
-  "#525949",
-  getRGBA(5, 255, 0.85),
-  "#c72230",
-  getRGBA(5, 255, 0.85),
-  "#4f5052",
-  getRGBA(5, 255, 0.85),
-  "#314659",
-  getRGBA(5, 255, 0.85),
-  "#ffe5a0",
-  getRGBA(5, 255, 0.85),
-  "#c7c7c7",
-  getRGBA(5, 255, 0.85),
-  "#181a1f",
-  getRGBA(5, 255, 0.85),
-  "#de985d",
-  getRGBA(5, 255, 0.85),
-  "#314659",
-];
-
-const borderColors = [
-  "rgba(54, 162, 235, 1)",
-  getRGBA(1),
-  "rgba(255, 206, 86, 1)",
-  getRGBA(1),
-  "rgba(255, 99, 132, 1)",
-  getRGBA(1),
-  "rgba(75, 192, 192, 1)",
-  getRGBA(1),
-  "rgba(153, 102, 255, 1)",
-  getRGBA(1),
-  "rgba(255, 159, 64, 1)",
-  getRGBA(1),
-  "rgba(159, 159, 159, 1)",
-  getRGBA(1),
-  "rgba(83, 102, 255, 1)",
-  getRGBA(1),
-  "rgba(40, 159, 64, 1)",
-  getRGBA(1),
-  "rgba(210, 199, 199, 1)",
-  getRGBA(1),
-  "rgba(78, 52, 199, 1)",
-  getRGBA(1),
-  "rgba(55, 192, 192, 1)",
-  getRGBA(1),
-];
-
-/**
- * Renders a doughnut chart for each character house name
- * categorized by the number of house name occurances
- * @param chartConfig contains the family name and count of each family name occurance
- */
-const chartConfig = (characterData) => {
-  return {
-    // labels: characterData.map((name) => name.familyName),
-    labels: [],
-    datasets: [
-      {
-        label: "Count",
-        data: characterData.map((name) => name.count),
-        backgroundColor: backgroundColors,
-        borderColor: borderColors,
-        borderWidth: 1,
-      },
-    ],
-  };
-};
-
-/**
- * Function will count the number of times a family name occurs
- * @param uniqueFamilyNames is an array of unique family names
- * @param familyNamesOccurance is an array to set the count of each family name occurance
- * Sets the count of each family name occurance to the familyNamesOccurance array
- */
-const countFamilyNameOccurance = function setTheCountOfFamilyNameOccurances(
-  familyNames,
-  chartData
-) {
-  // for each name in chartData,
-  // search familyNames array for matching names
-  // if match, increment count
-  // set count to chartData.count
-  chartData.map((data) => {
-    let count = 0;
-    familyNames.map((familyName) => {
-      if (data.familyName === familyName) {
-        ++count;
-      }
-    });
-    data.count = count;
-  });
-};
-
-/**
- * function will combine unique family names into a single array of objects
- * conaining the family name and count of each family name occurance,
- * where count is initially set to 0
- * @param familyNames is an array of all family names from the API
- * @param chartData is an an empty array
- * Sets chartData to an array of objects containing the family name and count
- */
-const combineFamilyNames = function combineUniqueFamilyNames(
-  familyNames,
-  chartData
-) {
-  let temp = familyNames.filter((name, index) => {
-    return familyNames.indexOf(name) === index;
-  });
-  temp.map((name) => {
-    chartData.push({
-      familyName: name,
-      count: 0,
-    });
-  });
-};
-
-/**
- * Function will sort the chartData array by family count from high to low
- * @param chartData array of objects containing family name and count
- * @returns an array sorted in descending order by count
- */
-const sortNumericHighLow = function sortArrayByCountInFamilyNameHighToLow(
-  chartData
-) {
-  const sortedData = chartData.sort((a, b) => b.count - a.count);
-  return sortedData;
-};
+import { sortNumericHighLow } from "../../modules/arraySort";
+import {
+  chartConfig,
+  countFamilyNameOccurance,
+  combineFamilyNames,
+} from "./modules/dataConfig";
 
 /**
  * Creates a DonutChart for the number of characters in each family

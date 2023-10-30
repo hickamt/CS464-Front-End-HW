@@ -7,8 +7,8 @@ canvas {
   max-width: auto;
 }
 
+
 .card-container {
-  /* overflow-x: hidden;
-  overflow-y: auto;
-  text-align: justify; */
+  margin: 0 auto;
+  width: 75%;
 }
