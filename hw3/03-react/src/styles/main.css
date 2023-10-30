@@ -11,10 +11,9 @@
 
 .main-body {
   grid-area: main-body;
-  margin-top: 0.75em;
+  margin-top: 10em;
   min-height: 16em;
   background-color: var(--black_swan);
-  /* height: auto; */
 }
 
 .dashboard-container {

@@ -1,4 +1,5 @@
 import { Outlet, Link } from "react-router-dom";
+import AudioDeck from "../audio/AudioPlayer";
 
 const Layout = () => {
   return (
@@ -38,6 +39,7 @@ const Layout = () => {
               </li>
             </ul>
           </div>
+          <AudioDeck audioSource={"https://ia801007.us.archive.org/29/items/01MainTitle_201905/01%20Main%20Title.mp3"} />
         </div>
       </nav>
       <Outlet />
