@@ -1,6 +1,6 @@
 
 /**
- * Fetches data from the Game of Thrones API
+ * (GET Request): Fetches data from the Game of Thrones API
  * @param url the url path required to fetch the data
  * @returns the response data as a .json() object
  */
@@ -10,7 +10,7 @@ const fetchData = async function fetchCharactersAPI() {
     const response = await fetch(url);
     return await response.json();
   } catch (error) {
-    throw new Error("Error fetching data");
+    throw new Error("Error fetching API data");
   }
 };
 

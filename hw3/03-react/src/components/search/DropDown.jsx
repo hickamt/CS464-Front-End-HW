@@ -17,9 +17,8 @@ function DropDown({ displayInput, handleListSelection, setDisplayInput }) {
         <ul>
           {displayInput.map((character, index) => {
             return (
-              <>
+              <div key={index}>
                 <a
-                  key={index}
                   className="list-item"
                   onClick={() => {
                     handleListSelection(character.id);
@@ -29,7 +28,7 @@ function DropDown({ displayInput, handleListSelection, setDisplayInput }) {
                     {character.firstName} {character.lastName}
                   </p>
                 </a>
-              </>
+              </div>
             );
           })}
         </ul>

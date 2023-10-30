@@ -1,30 +1,24 @@
-import { useState, useEffect } from "react";
-import gotAPI from "../api/gotAPI";
-import { cleanData } from "../modules/validateAndClean";
+import { useState } from "react";
 import Card from "./Card";
 import SpinAnimation from "../components/animation/Animation";
+
+// DataProvider Context
+import { useData } from "../dataprovider/DataProvider";
 
 /**
  * MainBody Card Component for LandingPage
  * Generates 3 cards at a time from the data fetched from API
  */
 const MainBody = function GOTCards() {
-  const [data, setData] = useState([]);
+  // data consumed from DataProvider Context
+  console.log("Use Data Called Again")
+  const data = useData(0)
   const [startIndex, setStartIndex] = useState(0);
   const maxDisplay = 3;
   let count = 0;
 
-  useEffect(() => {
-    console.log("inside useEffect()");
-    const getData = async () => {
-      const response = await gotAPI();
-      setData(cleanData(response));
-    };
-    getData();
-  }, []);
-
   setTimeout(() => {
-    if (startIndex < data.length - 3) {
+    if (startIndex < data.length - maxDisplay) {
       setStartIndex(startIndex + 1);
     } else {
       setStartIndex(0);
