@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 // Header setup for testing
 function Header({title}) {
   return (

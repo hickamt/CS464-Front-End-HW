@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /**
  * Created by: Todd Hickam | CS 464P/564P | Fall 2023
  * The following function will fetch Game of Thrones Characters from an API
@@ -25,7 +26,6 @@ import {
  * @returns an HTML element containing a DonutChart
  * representing the number of characters in each family
  */
-// eslint-disable-next-line react/prop-types
 function Chart({ characterData }) {
   const [chartData, setChartData] = useState([]);
   const [cardData, setCardData] = useState([]);
@@ -51,6 +51,7 @@ function Chart({ characterData }) {
       setChartData(sortNumericHighLow(data));
     };
     createDonutChart();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -63,7 +64,6 @@ function Chart({ characterData }) {
         />
       </div>
       {cardData && cardData.length > 0 && (
-        // <div className="card-container">
         <div className="card-container d-flex flex-wrap justify-content-around">
           {cardData.map((data, index) => {
             return <Card key={index} bgColor={bgColor} data={data} />;

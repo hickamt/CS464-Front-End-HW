@@ -10,11 +10,8 @@
  * @returns a dropdown list container with a list of characters
  */
 function DropDown({ displayInput, handleListSelection, setDisplayInput }) {
-  if (!displayInput) {
-    return null;
-  }
-
   return (
+    displayInput &&
     displayInput.length > 0 && (
       <div id="list-container" className="dropdown-list">
         <ul>

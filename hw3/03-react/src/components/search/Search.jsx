@@ -2,6 +2,11 @@ import './search.css'
 import Header from '../Header';
 import SearchField from './SearchField';
 
+/**
+ * Main Search Component 
+ * @returns a SearchField component which contains the search input and dropdown list
+ * @see SearchField
+ */
 function Search() {
   return (
     <>

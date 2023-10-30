@@ -7,9 +7,13 @@ import SpinAnimation from "../animation/Animation";
 
 // Styles
 import "./styles/house.css";
-// import { getElementAtEvent } from "react-chartjs-2";
 
-function ComponentThree() {
+/**
+ * Main Houses Component: Displaying the number of characters in each family as a donut chart
+ * @returns a DonutChart component containing the number of characters in each family
+ * as different colored segments of the chart
+ */
+function HousesChart() {
   const [data, setData] = useState([]);
   const [isData, setIsData] = useState(false);
 
@@ -36,4 +40,4 @@ function ComponentThree() {
   );
 }
 
-export default ComponentThree;
+export default HousesChart;

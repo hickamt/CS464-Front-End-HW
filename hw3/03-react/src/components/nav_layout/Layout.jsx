@@ -1,6 +1,10 @@
 import { Outlet, Link } from "react-router-dom";
 import AudioDeck from "../audio/AudioPlayer";
 
+/**
+ * Layout Component for the Nav Bar, Audio, and the Outlet 
+ * @returns a nav bar and the outlet for the routes
+ */
 const Layout = () => {
   return (
     <>
@@ -26,7 +30,6 @@ const Layout = () => {
           </button>
           <div className="navbar-collapse collapse" id="navbarNav">
             <ul className="navbar-nav">
-              {/* The following list items (<li>) are the navbar links to new pages */}
               <li className="nav-item active fs-4">
                 <Link className="nav-link fs-4" to="/search">
                   Search
@@ -39,7 +42,11 @@ const Layout = () => {
               </li>
             </ul>
           </div>
-          <AudioDeck audioSource={"https://ia801007.us.archive.org/29/items/01MainTitle_201905/01%20Main%20Title.mp3"} />
+          <AudioDeck
+            audioSource={
+              "https://ia801007.us.archive.org/29/items/01MainTitle_201905/01%20Main%20Title.mp3"
+            }
+          />
         </div>
       </nav>
       <Outlet />

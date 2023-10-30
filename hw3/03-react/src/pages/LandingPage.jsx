@@ -5,7 +5,7 @@ function LandingPage() {
   return (
     <>
       <div className="dashboard-container text-center mt-3">
-        <Header title={"Game Of Thrones"}/>
+        <Header title={"Game Of Thrones"} />
         <MainBody />
       </div>
     </>

@@ -1,12 +1,10 @@
-// import "bootstrap/dist/css/bootstrap.min.css";
-import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 
-// MAIN Routes
-import Layout from "./components/nav_layout/Layout"; // All page routes are wrapped within the Nav Layout
+/* MAIN Routes */
+import Layout from "./components/nav_layout/Layout";
 import LandingPage from "./pages/LandingPage";
 
-/* Additional Routes for Custom Pages */
+/* Additional Page Routes */
 import Search from "./components/search/Search";
 import Houses from "./components/houses/Houses";
 
