@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
 import Header from "../Header";
-import gotAPI from "../../api/gotAPI";
-import { cleanData } from "../../modules/validateAndClean";
 import DonutChart from "./DonutChart";
 import SpinAnimation from "../animation/Animation";
+
+// DataProvider Context
+import { useData } from "../../dataprovider/DataProvider";
 
 // Styles
 import "./styles/house.css";
@@ -14,24 +14,14 @@ import "./styles/house.css";
  * as different colored segments of the chart
  */
 function HousesChart() {
-  const [data, setData] = useState([]);
-  const [isData, setIsData] = useState(false);
-
-  useEffect(() => {
-    const getData = async () => {
-      const response = await gotAPI();
-      setData(cleanData(response));
-      setIsData(true);
-    };
-    getData();
-  }, []);
+  const data = useData(0);
 
   return (
     <div className="house-container">
       <div className="header-container mt-3">
         <Header title={"GOT | Houses"} />
       </div>
-      {isData && data.length > 0 && <SpinAnimation /> ? (
+      {data && data.length > 0 && <SpinAnimation /> ? (
         <DonutChart characterData={data} />
       ) : (
         <SpinAnimation />
