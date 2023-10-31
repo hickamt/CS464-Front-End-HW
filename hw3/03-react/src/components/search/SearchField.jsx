@@ -1,24 +1,17 @@
-import { useEffect, useState } from "react";
-import gotAPI from "../../api/gotAPI";
+import { useState } from "react";
 import Card from "../Card";
-import { cleanData, validateInput } from "../../modules/validateAndClean";
+import { validateInput } from "../../modules/validateAndClean";
 import { matchInput } from "../../modules/filterArray";
 import DropDown from "./DropDown";
 
+// DataProvider Context
+import { useData } from "../../dataprovider/DataProvider";
+
 function SearchField() {
-  const [data, setData] = useState([]);
+  const data = useData(0);
   const [isInputError, setIsInputError] = useState(false);
   const [displayInput, setDisplayInput] = useState([]);
   const [character, setCharacter] = useState(null);
-
-  // fetch character data
-  useEffect(() => {
-    const getData = async () => {
-      const response = await gotAPI();
-      setData(cleanData(response));
-    };
-    getData();
-  }, []);
 
   // handle user selection from dropdown list
   const handleListSelection = (input) => {
