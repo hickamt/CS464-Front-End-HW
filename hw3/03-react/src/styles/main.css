@@ -1,0 +1,65 @@
+/* Common Grid Item Styles */
+.header,
+.main-body {
+  border-radius: 0.5em;
+}
+
+.header {
+  /* background-color: var(--red_ochre); */
+  grid-area: header;
+}
+
+.main-body {
+  grid-area: main-body;
+  margin-top: 10em;
+  min-height: 16em;
+  background-color: var(--black_swan);
+}
+
+.dashboard-container {
+  margin: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "header header"
+    "main-body main-body";
+}
+
+/* Main Body Styles */
+
+.card {
+  margin: 1em 0 1em 0;
+  width: 34rem;
+  justify-content: center;
+  background: var(--blue_washington);
+  color: var(--whitetail);
+  border-radius: 0.75rem;
+}
+
+.card-img {
+  border-radius: 1em;
+  padding: 0.5rem;
+  width: 170px;
+  height: 190px;
+}
+
+.card-body {
+  margin-top: 1em;
+}
+
+/* MEDIA QUERY */
+
+@media only screen and (max-width: 1900px) {
+}
+
+@media only screen and (max-width: 1500px) {
+}
+
+@media only screen and (max-width: 520px) {
+  .card {
+    width: 20rem;
+    background: var(--blue_washington);
+    color: var(--whitetail);
+  }
+}

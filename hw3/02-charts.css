@@ -1,12 +1,28 @@
+:root {
+  --black: #020202;
+  --white: #ffffff;
+  --blue: #00425c;
+  --cyan: #17a2b8;
+}
 body {
   background-color: var(--cyan);
 }
 
+main {
+  margin: 0 auto;
+  width: 80%;
+  height: auto;
+}
+
 h1 {
+  display: none;
+  font-weight: bold;
   text-align: center;
+  color: var(--white);
 }
 
 .donut-chart {
+  margin-top: 5rem;
   padding: 2rem;
   border-radius: 0.8rem;
   background-color: var(--white);

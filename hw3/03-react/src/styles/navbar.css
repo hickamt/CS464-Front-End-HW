@@ -1,0 +1,39 @@
+.navbar.sticky-top {
+  background-color: var(--blue_washington);
+}
+
+.nav-link {
+  color: var(--whitetail);
+}
+
+.nav-link:hover {
+  color: var(--yellow_corn);
+}
+
+.nav-logo {
+  height: 4em;
+  width: 4em;
+  transition: 0.5s;
+}
+
+.nav-logo:hover {
+  background-color: var(--red_ochre);
+  border: 2px solid var(--off_black);
+  border-radius: 1em;
+  padding: 0.5em;
+  transition: 0.5s;
+}
+
+.navbar-toggler-icon {
+  background-image: url("../assets/targaryenDragon.png");
+  height: 3.5rem;
+  width: 3.5rem;
+  border: 1.5px solid var(--whitetail);
+  border-radius: 3rem;
+  transition: 0.5s;
+}
+
+.navbar-toggler-icon:hover {
+  background-color: var(--whitetail);
+  transition: 0.5s;
+}

@@ -1,0 +1,30 @@
+canvas {
+  margin: 0 auto;
+}
+
+.chart-container {
+  margin: 0 auto;
+  padding-bottom: 1em;
+  width: 45%;
+  background-color: rgba(240, 240, 240, 0.7);
+  border-radius: 1em;
+}
+
+
+.card-container {
+  margin: 0 auto;
+  width: 70%;
+}
+
+@media (max-width: 1400px) {
+  .chart-container {
+    width: 75%;
+  }
+}
+
+/* make the width of chart-container larger for mobile screens */
+@media (max-width: 768px) {
+  .chart-container {
+    width: 90%;
+  }
+}

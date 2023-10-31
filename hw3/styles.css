@@ -10,10 +10,58 @@ body {
 }
 
 h1 {
+  margin: 3rem 0;
   text-align: center;
+  font-weight: bold;
 }
 
-.donut-chart {
-  border-radius: 0.8rem;
-  background-color: var(--white);
+
+/* 01-Characters */
+
+.root-container {
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card.character {
+  align-items: center;
+  margin: 1rem;
+  padding: 0.5rem;
+  background-color: transparent;
+  width: 10rem;
+  border: none;
+}
+
+.card.character:hover {
+  background-color: var(--blue);
+  color: var(--white);
+}
+
+.character-img {
+  width: 130px;
+  height: 155px;
+}
+
+.character-name {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.character-title {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+@media (max-width: 1024px) {
+  .root-container {
+    width: 80%;
+  }
+}
+
+@media (max-width: 414px) {
+  .root-container {
+    width: 100%;
+  }
 }
